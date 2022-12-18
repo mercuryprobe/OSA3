@@ -6,7 +6,8 @@
 int philosopher[5] = {0, 0, 0, 0, 0}; //default: thinking
 int forks[5] = {0, 0, 0, 0, 0};
 pthread_mutex_t locks[5];
-FILE* file = fopen("q1a1Output.txt", "w");
+FILE* file; 
+file = fopen("q1a1Output.txt", "w");
 
 int pickFork(int i) {
     // printf("Locking %d | Status: %d\n", i, pthread_mutex_trylock(&locks[i]));
