@@ -2,17 +2,17 @@
 #include <unistd.h>
 
 int philosopher[5] = {0, 0, 0, 0, 0}; //default: thinking
-int fork[5] = {0, 0, 0, 0, 0};
+int forks[5] = {0, 0, 0, 0, 0};
 pthread_mutex_t locks[5];
 
-for (int i = 0; i<5; i++ ) {
+for (int i = 0; i<5; i++) {
     pthread_mutex_init(&locks[i], NULL);
 }
 
 int pickFork(int i) {
     pthread_mutex_lock(&locks[i]);
-    if (fork[i]!=1) {
-        fork[i] = 1;
+    if (forks[i]!=1) {
+        forks[i] = 1;
         return 0;
     } else {
         return -1;
@@ -30,8 +30,8 @@ void think(int i) {
 
 int putFork(int i) {
     int result;
-    if (fork[i]!=0) {
-        fork[i] = 0;
+    if (forks[i]!=0) {
+        forks[i] = 0;
         result = 0;
     } else {
         result = -1;
