@@ -9,7 +9,7 @@ pthread_mutex_t locks[5];
 
 int pickFork(int i) {
     // printf("Locking %d | Status: %d\n", i, pthread_mutex_trylock(&locks[i]));
-    pthread_mutex_trylock(&locks[i]);
+    pthread_mutex_lock(&locks[i]);
     // printf("----Fork %d picked----\n", i);
     if (forks[i]!=1) {
         forks[i] = 1;
