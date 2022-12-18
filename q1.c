@@ -74,6 +74,7 @@ int main() {
     int *_i = malloc(sizeof(*_i));
     for (int i=0; i<5; i++) {
         *_i = i;
+        printf("thread started: %d\n", i);
         pthread_create(&pids[i], NULL, &philosphise, _i);
     }
 
