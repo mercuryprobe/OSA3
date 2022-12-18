@@ -41,7 +41,7 @@ int putFork(i) {
 }
 
 
-void philosphise(void *_i) {
+void *philosphise(void *_i) {
     int i = (int) _i;
     while (1) {
         if (i<4) {
