@@ -8,7 +8,7 @@ int forks[5] = {0, 0, 0, 0, 0};
 pthread_mutex_t locks[5];
 
 int pickFork(int i) {
-    printf("Locking %d | Status: %d\n", i, pthread_mutex_lock(&locks[i]));
+    printf("Locking %d | Status: %d\n", i, pthread_mutex_trylock(&locks[i]));
     if (forks[i]!=1) {
         forks[i] = 1;
         return 0;
@@ -50,18 +50,16 @@ void *philosphise(void *_i) {
             pickFork((i+1)%5);
             eat(i);
             sleep(1);
-            putFork(i);
             putFork((i+1)%5);
-            
+            putFork(i);
             think(i);
         } else {
             pickFork((i+1)%5);
             pickFork(i);
             eat(i);
             sleep(1);
-            putFork((i+1)%5);
             putFork(i);
-            
+            putFork((i+1)%5);
             think(i);
         }
     }
