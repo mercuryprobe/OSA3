@@ -1,5 +1,7 @@
-#include <pthread.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
+#include <pthread.h>
 
 int philosopher[5] = {0, 0, 0, 0, 0}; //default: thinking
 int forks[5] = {0, 0, 0, 0, 0};
@@ -40,7 +42,7 @@ int putFork(int i) {
 
 void *philosphise(void *_i) {
     int i = *((int *) _i);
-    
+
     while (1) {
         if (i<4) {
             pickFork(i);
