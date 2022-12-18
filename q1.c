@@ -1,4 +1,5 @@
 #include <pthread.h>
+#include <unistd.h>
 
 int philosopher[5] = {0, 0, 0, 0, 0}; //default: thinking
 int fork[5] = {0, 0, 0, 0, 0};
@@ -8,7 +9,7 @@ for (int i = 0; i<5; i++ ) {
     pthread_mutex_init(&locks[i], NULL);
 }
 
-int pickFork(i) {
+int pickFork(int i) {
     pthread_mutex_lock(&locks[i]);
     if (fork[i]!=1) {
         fork[i] = 1;
@@ -18,16 +19,16 @@ int pickFork(i) {
     }
 }
 
-void eat(i) {
+void eat(int i) {
     philosopher[i] = 1;
 }
 
-void think(i) {
+void think(int i) {
     philosopher[i] = 0;
 }
 
 
-int putFork(i) {
+int putFork(int i) {
     int result;
     if (fork[i]!=0) {
         fork[i] = 0;
