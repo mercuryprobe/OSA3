@@ -56,8 +56,8 @@ void *philosphise(void *_i) {
             eat(i);
             sleep(1);
             printf("-P%d finish (forks %d and %d)!\n", i, i, (i+1)%5);
-            putFork((i+1)%5);
             putFork(i);
+            putFork((i+1)%5);
             // printf("[%d, %d, %d, %d, %d]\n", forks[0], forks[1], forks[2], forks[3], forks[4]);
             think(i);
         } else {
@@ -67,8 +67,8 @@ void *philosphise(void *_i) {
             eat(i);
             sleep(1);
             printf("-P%d finish (forks %d and %d)!\n", i, i, (i+1)%5);
-            putFork(i);
             putFork((i+1)%5);
+            putFork(i);
             think(i);
         }
     }
