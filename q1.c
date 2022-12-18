@@ -10,6 +10,7 @@ pthread_mutex_t locks[5];
 int pickFork(int i) {
     // printf("Locking %d | Status: %d\n", i, pthread_mutex_trylock(&locks[i]));
     pthread_mutex_trylock(&locks[i]);
+    printf("----Fork %d picked----", i);
     if (forks[i]!=1) {
         forks[i] = 1;
         return 0;
@@ -36,6 +37,7 @@ int putFork(int i) {
         result = -1;
     }
 
+    printf("----Fork %d released----", i);
     pthread_mutex_unlock(&locks[i]);
     return result;
 }
@@ -49,20 +51,20 @@ void *philosphise(void *_i) {
         if (i<4) {
             pickFork(i);
             pickFork((i+1)%5);
-            printf("--Philosopher %d eating (forks %d and %d)!---\n", i, i, (i+1)%5);
+            printf("+P%d eating (forks %d and %d)!\n", i, i, (i+1)%5);
             eat(i);
             sleep(1);
-            printf("--Philosopher %d stopped (forks %d and %d)!--\n", i, i, (i+1)%5);
+            printf("-P%d finish (forks %d and %d)!\n", i, i, (i+1)%5);
             putFork((i+1)%5);
             putFork(i);
             think(i);
         } else {
             pickFork((i+1)%5);
             pickFork(i);
-            printf("--Philosopher %d eating (forks %d and %d)!---\n", i, i, (i+1)%5);
+            printf("+P%d eating (forks %d and %d)!\n", i, i, (i+1)%5);
             eat(i);
             sleep(1);
-            printf("--Philosopher %d stopped (forks %d and %d)!--\n", i, i, (i+1)%5);
+            printf("-P%d finish (forks %d and %d)!\n", i, i, (i+1)%5);
             putFork(i);
             putFork((i+1)%5);
             think(i);
