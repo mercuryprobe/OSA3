@@ -33,7 +33,7 @@ int putFork(int i) {
         result = -1;
     }
 
-    pthread_mutex_unlock(&lock[i]);
+    pthread_mutex_unlock(&locks[i]);
     return result;
 }
 
