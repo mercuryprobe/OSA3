@@ -50,16 +50,18 @@ void *philosphise(void *_i) {
             pickFork((i+1)%5);
             eat(i);
             sleep(1);
-            putFork((i+1)%5);
             putFork(i);
+            putFork((i+1)%5);
+            
             think(i);
         } else {
             pickFork((i+1)%5);
             pickFork(i);
             eat(i);
             sleep(1);
-            putFork(i);
             putFork((i+1)%5);
+            putFork(i);
+            
             think(i);
         }
     }
