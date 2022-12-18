@@ -6,7 +6,7 @@
 int philosopher[5] = {0, 0, 0, 0, 0}; //default: thinking
 int forks[5] = {0, 0, 0, 0, 0};
 pthread_mutex_t locks[5];
-FILE* file; 
+FILE *file; 
 file = fopen("q1a1Output.txt", "w");
 
 int pickFork(int i) {
