@@ -43,6 +43,7 @@ int putFork(int i) {
 void *philosphise(void *_i) {
     int i = *((int *) _i);
 
+    printf("%d\n", i);
     while (1) {
         if (i<4) {
             pickFork(i);
@@ -74,6 +75,10 @@ int main() {
     for (int i=0; i<5; i++) {
         *_i = i;
         pthread_create(&pids[i], NULL, &philosphise, _i);
+    }
+
+    for (int i=0; i<5; i++) {
+        pthread_join(pids[i], NULL);
     }
 
     return 0;
