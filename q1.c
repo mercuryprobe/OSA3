@@ -59,10 +59,10 @@ void *philosphise(void *_i) {
         } else {
             pickFork((i+1)%5);
             pickFork(i);
-            printf("--Philosopher %d is eating!--\n", i);
+            printf("--Philosopher %d eating (forks %d and %d)!---\n", i, i, (i+1)%5);
             eat(i);
             sleep(1);
-            printf("--Philosopher %d has stopped eating!--\n", i);
+            printf("--Philosopher %d stopped (forks %d and %d)!--\n", i, i, (i+1)%5);
             putFork(i);
             putFork((i+1)%5);
             think(i);
