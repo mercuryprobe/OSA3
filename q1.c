@@ -68,7 +68,7 @@ int main() {
     pthread_t pids[5];
     
     for (int i=0; i<5; i++) {
-        pthread_create(&pids[i], NULL, philosphise, (void *) i);
+        pthread_create(&pids[i], NULL, &philosphise, (void *) i);
     }
 
     return 0;
