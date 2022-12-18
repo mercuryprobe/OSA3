@@ -5,10 +5,6 @@ int philosopher[5] = {0, 0, 0, 0, 0}; //default: thinking
 int forks[5] = {0, 0, 0, 0, 0};
 pthread_mutex_t locks[5];
 
-for (int i = 0; i<5; i++) {
-    pthread_mutex_init(&locks[i], NULL);
-}
-
 int pickFork(int i) {
     pthread_mutex_lock(&locks[i]);
     if (forks[i]!=1) {
@@ -67,6 +63,9 @@ void *philosphise(void *_i) {
 
 int main() {
     pthread_t pids[5];
+    for (int i = 0; i<5; i++) {
+        pthread_mutex_init(&locks[i], NULL);
+    }
     
     for (int i=0; i<5; i++) {
         pthread_create(&pids[i], NULL, &philosphise, (void *) i);
