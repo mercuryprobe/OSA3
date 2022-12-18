@@ -39,7 +39,8 @@ int putFork(int i) {
 
 
 void *philosphise(void *_i) {
-    int i = (int) _i;
+    int i = *((int *) _i);
+    
     while (1) {
         if (i<4) {
             pickFork(i);
@@ -67,8 +68,10 @@ int main() {
         pthread_mutex_init(&locks[i], NULL);
     }
     
+    int *_i = malloc(sizeof(*_i));
     for (int i=0; i<5; i++) {
-        pthread_create(&pids[i], NULL, &philosphise, (void *) i);
+        *_i = i;
+        pthread_create(&pids[i], NULL, &philosphise, _i);
     }
 
     return 0;
