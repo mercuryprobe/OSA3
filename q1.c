@@ -48,8 +48,10 @@ void *philosphise(void *_i) {
         if (i<4) {
             pickFork(i);
             pickFork((i+1)%5);
+            printf("--Philosopher %d is eating!--\n", i);
             eat(i);
             sleep(1);
+            printf("--Philosopher %d has stopped eating!--\n", i);
             putFork((i+1)%5);
             putFork(i);
             think(i);
