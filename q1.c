@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <pthread.h>
+#include <signal.h>
 
 int philosopher[5] = {0, 0, 0, 0, 0}; //default: thinking
 int forks[5] = {0, 0, 0, 0, 0};
