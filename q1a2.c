@@ -3,10 +3,10 @@
 #include <unistd.h>
 #include <pthread.h>
 #include <signal.h>
+#include <semaphore.h>
 
 int philosopher[5] = {0, 0, 0, 0, 0}; //default: thinking
-int forks[5] = {0, 0, 0, 0, 0};
-pthread_mutex_t locks[5];
+sem_t semaphores[5];
 
 static volatile sig_atomic_t active = 1;
 static void interrupter(int x) {
@@ -15,14 +15,7 @@ static void interrupter(int x) {
 
 int pickFork(int i) {
     // printf("Locking %d | Status: %d\n", i, pthread_mutex_trylock(&locks[i]));
-    pthread_mutex_lock(&locks[i]);
-    // printf("----Fork %d picked----\n", i);
-    if (forks[i]!=1) {
-        forks[i] = 1;
-        return 0;
-    } else {
-        return -1;
-    }
+    sem_wait(&semaphores[i]);
 }
 
 void eat(int i) {
@@ -85,7 +78,7 @@ void *philosphise(void *_i) {
 int main() {
     pthread_t pids[5];
     for (int i = 0; i<5; i++) {
-        pthread_mutex_init(&locks[i], NULL);
+        sem_init(&semaphores[i], 0, 1);
     }
     
     signal(SIGINT, interrupter);
