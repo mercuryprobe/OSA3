@@ -28,17 +28,7 @@ void think(int i) {
 
 
 int putFork(int i) {
-    int result;
-    if (forks[i]!=0) {
-        forks[i] = 0;
-        result = 0;
-    } else {
-        result = -1;
-    }
-
-    // printf("----Fork %d released----\n", i);
-    pthread_mutex_unlock(&locks[i]);
-    return result;
+    sem_wait(&semaphores[i]);
 }
 
 
