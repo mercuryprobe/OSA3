@@ -14,7 +14,6 @@ static void interrupter(int x) {
 }
 
 int pickFork(int i) {
-    // printf("Locking %d | Status: %d\n", i, pthread_mutex_trylock(&locks[i]));
     sem_wait(&semaphores[i]);
 }
 
