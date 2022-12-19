@@ -60,6 +60,7 @@ void *philosphise(void *_i) {
 }
 
 int main() {
+    puts("---Semaphore---");
     pthread_t pids[5];
     for (int i = 0; i<5; i++) {
         sem_init(&semaphores[i], 0, 1);
