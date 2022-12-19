@@ -90,6 +90,7 @@ int main() {
         pthread_create(&pids[i], NULL, &philosphise, _i);
     }
 
+    sleep(10);
     for (int i=0; i<5; i++) {
         pthread_join(pids[i], NULL);
     }
