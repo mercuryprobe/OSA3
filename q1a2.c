@@ -27,7 +27,7 @@ void think(int i) {
 
 
 int putFork(int i) {
-    sem_wait(&semaphores[i]);
+    sem_post(&semaphores[i]);
 }
 
 
