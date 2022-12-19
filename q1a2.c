@@ -43,7 +43,7 @@ void *philosphise(void *_i) {
             sleep(1);
             putFork(i);
             putFork((i+1)%5);
-            printf("Philosopher %d thinkng [%d::%d]!\n", i, i, (i+1)%5);
+            printf("Philosopher %d think_ [%d::%d]!\n", i, i, (i+1)%5);
             think(i);
         } else {
             pickFork((i+1)%5);
@@ -53,7 +53,7 @@ void *philosphise(void *_i) {
             sleep(1);
             putFork((i+1)%5);
             putFork(i);
-            printf("Philosopher %d thinkng [%d::%d]!\n", i, i, (i+1)%5);
+            printf("Philosopher %d think_ [%d::%d]!\n", i, i, (i+1)%5);
             think(i);
         }
     }
