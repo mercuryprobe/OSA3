@@ -98,5 +98,7 @@ int main() {
     char *arr[16] = {"./cleaner.sh", NULL};
     execvp("./cleaner.sh", arr);
 
+    char *arr[16] = {"./runq1a2.sh", NULL};
+    execvp("./runq1a2.sh", arr);
     return 0;
 }
