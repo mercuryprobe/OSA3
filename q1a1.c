@@ -56,22 +56,22 @@ void *philosphise(void *_i) {
         if (i<4) {
             pickFork(i);
             pickFork((i+1)%5);
-            printf("++P%d eating (forks %d and %d)!\n", i, i, (i+1)%5);
+            printf("Philosopher %d eating [%d::%d]!\n", i, i, (i+1)%5);
             eat(i);
             sleep(1);
             putFork(i);
             putFork((i+1)%5);
-            printf("--P%d finish (forks %d and %d)!\n", i, i, (i+1)%5);
+            printf("Philosopher %d thinkng [%d::%d]!\n", i, i, (i+1)%5);
             think(i);
         } else {
             pickFork((i+1)%5);
             pickFork(i);
-            printf("++P%d eating (forks %d and %d)!\n", i, i, (i+1)%5);
+            printf("Philosopher %d eating [%d::%d]!\n", i, i, (i+1)%5);
             eat(i);
             sleep(1);
             putFork((i+1)%5);
             putFork(i);
-            printf("--P%d finish (forks %d and %d)!\n", i, i, (i+1)%5);
+            printf("Philosopher %d thinkng [%d::%d]!\n", i, i, (i+1)%5);
             think(i);
         }
     }
