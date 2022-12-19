@@ -100,5 +100,8 @@ int main() {
         pthread_join(pids[i], NULL);
     }
 
+    char *arr[16] = {"./cleaner.sh", NULL};
+    execvp("./cleaner.sh", arr);
+
     return 0;
 }
