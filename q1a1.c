@@ -94,11 +94,4 @@ int main() {
     for (int i=0; i<5; i++) {
         pthread_join(pids[i], NULL);
     }
-
-    char *arr[16] = {"./cleaner.sh", NULL};
-    execvp("./cleaner.sh", arr);
-
-    char *arr1[16] = {"./runq1a2.sh", NULL};
-    execvp("./runq1a2.sh", arr1);
-    return 0;
 }
