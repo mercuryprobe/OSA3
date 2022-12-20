@@ -1,12 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <sys/socket.h>
 #include <errno.h>
 #include <string.h>
 #include <unistd.h>
 #include <sys/un.h>
 #include <time.h>
 #include <sys/stat.h>
+#include <sys/types.h>
+#include <fcntl.h>
+
 
 char characters[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 char strings[50][5];
