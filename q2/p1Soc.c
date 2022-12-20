@@ -19,8 +19,14 @@ void constructor() {
 }
 
 int main() {
-    constructor();
     // reference: The Linux Programming Interface, Michael Kerrisk
+    struct timespec start;
+    struct timespec stop;
+    double billion = 1000000000;
+    clock_gettime(CLOCK_REALTIME, &start);
+
+    constructor();
+    
     int sfiledescriptor = socket(AF_UNIX, SOCK_STREAM, 0);
     if (sfiledescriptor<0) {
         perror("[SERVER] Socket initiation failed:");
@@ -91,6 +97,10 @@ int main() {
         }
     }
     
+    clock_gettime(CLOCK_REALTIME, &stop);
+    double duration = stop.tv_sec + stop.tv_nsec/billion - (start.tv_sec + start.tv_nsec/billion);
+
+    printf("Sockets runtime: %lf\n", duration);
     close(sfiledescriptor);
     close(cfiledescriptor);
     return 0;
