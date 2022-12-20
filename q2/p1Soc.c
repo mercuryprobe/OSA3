@@ -72,13 +72,13 @@ int main() {
             strcat(curString, space);        //add space
         }
         // puts(curString);
-        if ((write(cfiledescriptor, &curString, sizeof(curString)))<0) {
+        if ((write(cfiledescriptor, curString, sizeof(curString)))<0) {
             perror("[SERVER] Socket write failed");
             return 0;
         }
         
         char received[4];
-        if (read(cfiledescriptor, &received, sizeof(received))<0) {
+        if (read(cfiledescriptor, received, sizeof(received))<0) {
             perror("[SERVER] Socket read failed");
         };
         printf("[SERVER] Sent: %s\n", curString);
