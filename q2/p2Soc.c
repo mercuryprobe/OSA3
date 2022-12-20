@@ -31,6 +31,7 @@ int main() {
     const char space[2] = " ";
     char received[64];
     int recSize;
+    sleep(1);
     while (recSize = read(filedescriptor, received, 64)>0) {
         if (recSize<0) {
             perror("[CLIENT] Socket read failed");
@@ -52,11 +53,13 @@ int main() {
             i+=1;
         }
 
+        sleep(1);
 
         if ((write(filedescriptor, splitString[8], sizeof(splitString[8])))<0) {
             perror("[CLIENT] Socket write failed");
             return 0;
         }
+        sleep(1);
     };
     
     close(filedescriptor);
