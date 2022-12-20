@@ -29,7 +29,7 @@ int pickFork(int i, int philNum) {
 void eat(int i) {
     philosopher[i] = 2;
     int curMain = maintainer++;
-    l3[curMain%3];
+    l3[curMain%3]=i;
 }
 
 void think(int i) {
@@ -64,7 +64,7 @@ void *philosphise(void *_i) {
             if (pickFork(i, i)==-1) {continue;}
             if (pickFork((i+1)%5, i)==-1) {continue;}
             eat(i);
-            printf("Philosopher %d eating [%d::%d]!%d\n", i, i, (i+1)%5, maintainer);
+            printf("Philosopher %d eating [%d::%d]!\n", i, i, (i+1)%5);
             sleep(1);
             think(i);
             printf("Philosopher %d think_ [%d::%d]!\n", i, i, (i+1)%5);
