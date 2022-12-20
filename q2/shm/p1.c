@@ -9,7 +9,7 @@
 #include <fcntl.h>
 #include <sys/mman.h>
 #include <signal.h>
-// #include <semaphore.h>
+#include <semaphore.h>
 
 #define semLocation "/tmp/semSync"
 
