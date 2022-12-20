@@ -15,7 +15,7 @@ static int pidInt;
 static struct pid *pidStruct;
 struct task_struct *curTask;
 
-module_param(procpid, int, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+module_param(pidInt, int, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 
 int init_module(void) {
     pr_info("Hello world\n");
