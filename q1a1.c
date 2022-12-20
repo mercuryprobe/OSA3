@@ -59,13 +59,12 @@ void *philosphise(void *_i) {
     while (active) {
         int outp;
         if (outp = (l3Check(i)==-1)) {usleep(200);}
-        printf("%d", outp);
         if (i<4) {
             // printf("%d :: [%d %d %d %d %d]\n", i, philosopher[0], philosopher[1], philosopher[2], philosopher[3], philosopher[4]);
             if (pickFork(i, i)==-1) {continue;}
             if (pickFork((i+1)%5, i)==-1) {continue;}
             eat(i);
-            printf("Philosopher %d eating [%d::%d]!\n", i, i, (i+1)%5);
+            printf("Philosopher %d eating [%d::%d]!%d\n", i, i, (i+1)%5, maintainer);
             sleep(1);
             think(i);
             printf("Philosopher %d think_ [%d::%d]!\n", i, i, (i+1)%5);
