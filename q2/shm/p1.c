@@ -10,7 +10,7 @@
 #include <sys/mman.h>
 #include <semaphore.h>
 
-#DEFINE semLocation = "/semSync"
+#define semLocation = "/tmp/semSync"
 
 char characters[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 char strings[50][5];
