@@ -13,7 +13,7 @@
 int main() {
     usleep(10);
     // reference: The Linux Programming Interface, Michael Kerrisk
-    const char *semLocation "/tmp/semSync";
+    const char *semLocation = "/tmp/semSync";
     const char *location = "/sharedmem";
     const char space[2] = " ";
     sem_t *sem = sem_open(semLocation, O_RDWR, S_IRUSR | S_IWUSR, 1);

@@ -26,7 +26,7 @@ void constructor() {
 
 int main() {
     // reference: The Linux Programming Interface, Michael Kerrisk
-    const char *semLocation "/tmp/semSync";
+    const char *semLocation = "/tmp/semSync";
     const char *location = "/sharedmem";
     struct timespec start;
     struct timespec stop;
