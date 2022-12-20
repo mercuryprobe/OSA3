@@ -64,14 +64,12 @@ int main() {
             // reference: https://stackoverflow.com/questions/8257714/how-to-convert-an-int-to-string-in-c
             int length = snprintf(NULL, 0, "%d", i);
             char* numStr = malloc(length + 1);
-            puts("1");
+            
             snprintf(numStr, length+1, "%d", i);
-            puts("2");
-            strcat(curString, space);        //add space
             strcat(curString, numStr);       //add integer
+            strcat(curString, space);        //add space
             strcat(curString, strings[i]);   //add current string
             strcat(curString, space);        //add space
-            puts("3");
             puts(curString);
         }
         puts(curString);
