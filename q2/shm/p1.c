@@ -8,7 +8,8 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <sys/mman.h>
-#include <semaphore.h>
+#include <signal.h>
+// #include <semaphore.h>
 
 #define semLocation "/tmp/semSync"
 
@@ -32,7 +33,7 @@ int main() {
     struct timespec stop;
     double billion = 1000000000;
     sem_t *sem = sem_open(semLocation, O_CREAT | O_RDWR, S_IRUSR | S_IWUSR, 1);
-    
+
     constructor();
     
     // https://man7.org/linux/man-pages/man3/shm_open.3.html, example
