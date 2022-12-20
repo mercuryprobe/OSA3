@@ -3,6 +3,7 @@
 #include <sys/socket.h>
 #include <errno.h>
 #include <string.h>
+#include <unistd.h>
 
 char characters[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 char strings[50][5];
@@ -45,7 +46,7 @@ int main() {
     while (i<50) {
 
         char curString[56];
-        char space[] = " ";
+        const char space[2] = " ";
         for (i; i<(i+5); i++) {
             // reference: https://stackoverflow.com/questions/8257714/how-to-convert-an-int-to-string-in-c
             int length = snprintf( NULL, 0, "%d", i);
