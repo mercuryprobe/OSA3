@@ -1,5 +1,5 @@
-main: p1.out p2.out
-	rm /tmp/sharedmem
+#rm /tmp/sharedmem
+main: p1.out p2.out	
 	./p1.out & ./p2.out
 
 p1.out: p1.c
