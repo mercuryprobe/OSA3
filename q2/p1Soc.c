@@ -78,7 +78,7 @@ int main() {
             perror("[SERVER] Socket write failed");
             return 0;
         }
-        printf("[SERVER] Characters written: %d\n", charWritten);
+        // printf("[SERVER] Characters written: %d\n", charWritten);
         
         char received[64];
         if (read(cfiledescriptor, received, 64)<0) {
