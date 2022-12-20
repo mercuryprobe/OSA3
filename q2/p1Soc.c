@@ -30,7 +30,7 @@ int main() {
     struct sockaddr_un sockAddress;
     memset(&sockAddress, 0, sizeof(struct sockaddr_un));
     sockAddress.sun_family = AF_UNIX;
-    strncpy(sockAddress.sun_path, "socket/socketFile", sizeof(sockAddress.sun_path) - 1);
+    strncpy(sockAddress.sun_path, "/tmp/socketFile", sizeof(sockAddress.sun_path) - 1);
     
     if ((bind(sfiledescriptor, (struct sockaddr *) &sockAddress, sizeof(sockAddress))!=0)) {
         perror("[SERVER] Socket bind failed:");
