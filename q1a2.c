@@ -7,6 +7,8 @@
 
 int philosopher[5] = {0, 0, 0, 0, 0}; //default: thinking
 sem_t semaphores[5];
+int l3[3] = {-1, -1, -1};
+int maintainer=0;
 
 static volatile sig_atomic_t active = 1;
 static void interrupter(int x) {
@@ -19,6 +21,8 @@ void pickFork(int i) {
 
 void eat(int i) {
     philosopher[i] = 1;
+    int curMain = maintainer++;
+    l3[curMain%3]=i;
 }
 
 void think(int i) {
@@ -30,11 +34,21 @@ void putFork(int i) {
     sem_post(&semaphores[i]);
 }
 
+int l3Check(int j) {
+    // checks if more than 1 of the last two eatings were of the same philosopher
+    int num;
+    for (int i =0; i<3; i++) {
+        if (j==l3[i]) {num++;}
+    }
+    return -(num>1); 
+}
 
 void *philosphise(void *_i) {
     int i = *((int *) _i);
 
     while (active) {
+        int outp;
+        if (outp = (l3Check(i)==-1)) {usleep(200);}
         if (i<4) {
             pickFork(i);
             pickFork((i+1)%5);
