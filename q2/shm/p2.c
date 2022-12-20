@@ -10,10 +10,11 @@
 #include <sys/mman.h>
 
 int main() {
-    sleep(10);
+    usleep(10);
     // reference: The Linux Programming Interface, Michael Kerrisk
     const char *location = "/sharedmem";
     const char space[2] = " ";
+    sem_t *sem = sem_open("/tmp/semSync", O_RDWR, S_IRUSR | S_IWUSR, 1);
     
     int filedescriptor = shm_open(location, O_RDWR, S_IRUSR | S_IWUSR);
 
@@ -28,7 +29,7 @@ int main() {
 
     
     for (int l =0; l<10; l++) {
-        usleep(100);
+        sem_wait(&sem);
         char received[64];
         sscanf(pointer, "%s", received);
         printf("[CLIENT] Received: %s\n", received);
@@ -48,7 +49,8 @@ int main() {
         // puts("");
         // printf("Splitstring[8]: %s", splitString[8]);
         sprintf(pointer, "%s", splitString[8]);
-    };
+        sem_post(&sem);
+    }
     munmap(pointer, 2048);
     close(filedescriptor);
 
