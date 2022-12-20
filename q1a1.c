@@ -59,9 +59,9 @@ void *philosphise(void *_i) {
             printf("Philosopher %d eating [%d::%d]!\n", i, i, (i+1)%5);
             eat(i);
             sleep(1);
-            printf("Philosopher %d think_ [%d::%d]!\n", i, i, (i+1)%5);
             putFork(i);
             putFork((i+1)%5);
+            printf("Philosopher %d think_ [%d::%d]!\n", i, i, (i+1)%5);
             think(i);
         } else {
             pickFork((i+1)%5);
@@ -69,9 +69,9 @@ void *philosphise(void *_i) {
             printf("Philosopher %d eating [%d::%d]!\n", i, i, (i+1)%5);
             eat(i);
             sleep(1);
-            printf("Philosopher %d think_ [%d::%d]!\n", i, i, (i+1)%5);
             putFork((i+1)%5);
             putFork(i);
+            printf("Philosopher %d think_ [%d::%d]!\n", i, i, (i+1)%5);
             think(i);
         }
     }
