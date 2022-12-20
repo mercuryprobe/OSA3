@@ -5,20 +5,19 @@
 #include <signal.h>
 
 int philosopher[5] = {0, 0, 0, 0, 0}; //default: thinking
-int forks[5] = {0, 0, 0, 0, 0};
-pthread_mutex_t locks[5];
+int forks[5] = {-1, -1, -1, -1, -1};
 
 static volatile sig_atomic_t active = 1;
 static void interrupter(int x) {
     active = 0;
 }
 
-int pickFork(int i) {
-    // printf("Locking %d | Status: %d\n", i, pthread_mutex_trylock(&locks[i]));
-    pthread_mutex_lock(&locks[i]);
-    // printf("----Fork %d picked----\n", i);
-    if (forks[i]!=1) {
-        forks[i] = 1;
+int pickFork(int i, int philNum) {
+    if ((forks[i]==-1) || ((forks[i]!=-1) && ((philosopher[forks[i]]==0) || (philNum==forks[i])))) {
+        // if fork is unused or philosopher last using the fork has returned to thinking 
+        // or if the philosopher last using the fork was the current one
+        philosopher[philNum]=1; //acquiring a fork makes the philosopher hungry
+        forks[i]=philNum; //fork is labelled to be in use by current philosopher
         return 0;
     } else {
         return -1;
@@ -26,7 +25,7 @@ int pickFork(int i) {
 }
 
 void eat(int i) {
-    philosopher[i] = 1;
+    philosopher[i] = 2;
 }
 
 void think(int i) {
@@ -34,18 +33,11 @@ void think(int i) {
 }
 
 
-int putFork(int i) {
-    int result;
-    if (forks[i]!=0) {
-        forks[i] = 0;
-        result = 0;
-    } else {
-        result = -1;
-    }
-
-    // printf("----Fork %d released----\n", i);
-    pthread_mutex_unlock(&locks[i]);
-    return result;
+int putFork() {
+    // doesn't do anything. 
+    // the lesser the interaction with forks[], the lesser the chances of conflict
+    // returning to thinking will allow other philosophers to take the fork
+    // fork doesn't inherently need to store the state of use, only the user
 }
 
 
@@ -54,34 +46,30 @@ void *philosphise(void *_i) {
 
     while (active) {
         if (i<4) {
-            pickFork(i);
-            pickFork((i+1)%5);
-            printf("Philosopher %d eating [%d::%d]!\n", i, i, (i+1)%5);
+            // printf("%d :: [%d %d %d %d %d]\n", i, philosopher[0], philosopher[1], philosopher[2], philosopher[3], philosopher[4]);
+            if (pickFork(i, i)==-1) {continue;}
+            if (pickFork((i+1)%5, i)==-1) {continue;}
             eat(i);
+            printf("Philosopher %d eating [%d::%d]!\n", i, i, (i+1)%5);
             sleep(1);
-            putFork(i);
-            putFork((i+1)%5);
-            printf("Philosopher %d think_ [%d::%d]!\n", i, i, (i+1)%5);
             think(i);
+            printf("Philosopher %d think_ [%d::%d]!\n", i, i, (i+1)%5);
+            
         } else {
-            pickFork((i+1)%5);
-            pickFork(i);
-            printf("Philosopher %d eating [%d::%d]!\n", i, i, (i+1)%5);
+            // printf("%d :: [%d %d %d %d %d]\n", i, philosopher[0], philosopher[1], philosopher[2], philosopher[3], philosopher[4]);
+            if (pickFork((i+1)%5, i)==-1) {continue;}
+            if (pickFork(i, i)==-1) {continue;}
             eat(i);
+            printf("Philosopher %d eating [%d::%d]!\n", i, i, (i+1)%5);
             sleep(1);
-            putFork((i+1)%5);
-            putFork(i);
-            printf("Philosopher %d think_ [%d::%d]!\n", i, i, (i+1)%5);
             think(i);
+            printf("Philosopher %d think_ [%d::%d]!\n", i, i, (i+1)%5);
         }
     }
 }
 
 int main() {
     pthread_t pids[5];
-    for (int i = 0; i<5; i++) {
-        pthread_mutex_init(&locks[i], NULL);
-    }
     
     signal(SIGINT, interrupter);
     for (int i=0; i<5; i++) {
