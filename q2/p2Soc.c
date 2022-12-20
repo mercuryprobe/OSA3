@@ -19,7 +19,7 @@ int main() {
     memset(&sockAddress, 0, sizeof(struct sockaddr_un));
     sockAddress.sun_family = AF_UNIX;
     strncpy(sockAddress.sun_path, "/tmp/socketFile", sizeof(sockAddress.sun_path) - 1);
-    sleep(2);
+    sleep(1);
     if ((connect(filedescriptor, (struct sockaddr *) &sockAddress, sizeof(sockAddress))!=0)) {
         perror("[CLIENT] Socket connect failed:");
         return 0;
@@ -27,6 +27,7 @@ int main() {
         puts("[CLIENT] Connection successful!");
     }
 
+    sleep(1);
     const char space[2] = " ";
     char received[56];
     int recSize;
