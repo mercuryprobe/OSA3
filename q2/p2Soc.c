@@ -38,8 +38,8 @@ int main() {
         } else {
             printf("[CLIENT] Read successful! %d\n", recSize);
         }
-        received[recSize] = 0;
         printf("[CLIENT] Received: %s\n", received);
+        // received[recSize] = 0;
 
         char* tokenRecv;
         tokenRecv = strtok(received, space);
@@ -51,7 +51,7 @@ int main() {
             tokenRecv = strtok(NULL, space);
             i+=1;
         }
-        
+
         if ((write(filedescriptor, splitString[8], sizeof(splitString[8])))<0) {
             perror("[CLIENT] Socket write failed");
             return 0;
