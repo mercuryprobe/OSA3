@@ -25,6 +25,8 @@ int main() {
     if (sfiledescriptor<0) {
         perror("[SERVER] Socket initiation failed:");
         return 0;
+    } else {
+        puts("[SERVER] Initiation successful!");
     }
 
     struct sockaddr_un sockAddress;
@@ -35,10 +37,15 @@ int main() {
     if ((bind(sfiledescriptor, (struct sockaddr *) &sockAddress, sizeof(sockAddress))!=0)) {
         perror("[SERVER] Socket bind failed:");
         return 0;
+    } else {
+        puts("[SERVER] Bind successful!");
     }
+
     if ((listen(sfiledescriptor, 64))!=0) {
-        perror("[SERVER] Socket bind failed:");
+        perror("[SERVER] Socket listen failed:");
         return 0;
+    } else {
+        puts("[SERVER] listen successful!");
     }
 
     int cfiledescriptor = accept(sfiledescriptor, NULL, NULL);

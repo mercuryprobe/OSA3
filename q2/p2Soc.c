@@ -11,6 +11,8 @@ int main() {
     if (filedescriptor<0) {
         perror("[CLIENT] Socket initiation failed:");
         return 0;
+    } else {
+        puts("[CLIENT] Initiation successful!");
     }
 
     struct sockaddr_un sockAddress;
@@ -21,6 +23,8 @@ int main() {
     if ((connect(filedescriptor, (struct sockaddr *) &sockAddress, sizeof(sockAddress))!=0)) {
         perror("[CLIENT] Socket connect failed:");
         return 0;
+    } else {
+        puts("[CLIENT] Connection successful!");
     }
 
     const char space[2] = " ";
@@ -30,6 +34,8 @@ int main() {
         if (recSize<0) {
             perror("[CLIENT] Socket read failed");
             return 0;
+        } else {
+            puts("[SERVER] Read successful!");
         }
         received[recSize] = 0;
         printf("Received: %s\n", received);
