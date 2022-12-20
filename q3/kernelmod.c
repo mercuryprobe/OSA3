@@ -19,8 +19,6 @@ struct task_struct *curTask;
 module_param(pidInt, int, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 
 int init_module(void) {
-    pr_info("Hello world\n");
-
     pidStruct = find_get_pid(pidInt);
     if (pidStruct==NULL) {
         pr_info("Invalid PID\n");
@@ -41,4 +39,8 @@ int init_module(void) {
     return 0;
 }
 
+
+def cleanup_module() {
+    pr_info("Done\n");
+}
 MODULE_LICENSE("Dual BSD/GPL");
