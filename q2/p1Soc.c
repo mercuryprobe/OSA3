@@ -57,18 +57,20 @@ int main() {
     }
     int i  = 0;    
     while (i<50) {
-        printf("%d\n", i);
         char curString[56];
         const char space[2] = " ";
         for (i; i<(i+5); i++) {
             // reference: https://stackoverflow.com/questions/8257714/how-to-convert-an-int-to-string-in-c
             int length = snprintf( NULL, 0, "%d", i);
             char* numStr = malloc(length + 1);
+            puts("1");
             snprintf(numStr, length+1, "%d", i);
+            puts("2");
             strcat(curString, space);        //add space
             strcat(curString, numStr);       //add integer
             strcat(curString, strings[i]);   //add current string
             strcat(curString, space);        //add space
+            puts("3");
         }
         puts(curString);
         if ((write(cfiledescriptor, &curString, sizeof(curString)))!=0) {
