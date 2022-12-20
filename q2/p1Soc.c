@@ -60,7 +60,7 @@ int main() {
         char curString[56];
         const char space[2] = " ";
         int j = i+5;
-        for (i; i<(j+5); i++) {
+        for (i; i<(j); i++) {
             // reference: https://stackoverflow.com/questions/8257714/how-to-convert-an-int-to-string-in-c
             int length = snprintf(NULL, 0, "%d", i);
             char* numStr = malloc(length + 1);
@@ -71,7 +71,7 @@ int main() {
             strcat(curString, strings[i]);   //add current string
             strcat(curString, space);        //add space
         }
-        puts(curString);
+        // puts(curString);
         if ((write(cfiledescriptor, &curString, sizeof(curString)))<0) {
             perror("[SERVER] Socket write failed");
             return 0;
