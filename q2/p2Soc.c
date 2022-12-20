@@ -36,10 +36,10 @@ int main() {
             perror("[CLIENT] Socket read failed");
             return 0;
         } else {
-            printf("[CLIENT] Read successful! %d\n", recSize);
+            printf("[CLIENT] Read successful!\n");
         }
         printf("[CLIENT] Received: %s\n", received);
-        // received[recSize] = 0;
+        received[63] = 0;
 
         char* tokenRecv;
         tokenRecv = strtok(received, space);
@@ -48,10 +48,11 @@ int main() {
         int i = 0;
         while (tokenRecv!=NULL) {
             strcpy(splitString[i], tokenRecv);
+            puts(tokenRecv);
             tokenRecv = strtok(NULL, space);
             i+=1;
         }
-
+        printf("Splitstring[8]: %s", splitString[8]);
         if ((write(filedescriptor, splitString[8], sizeof(splitString[8])))<0) {
             perror("[CLIENT] Socket write failed");
             return 0;
