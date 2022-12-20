@@ -36,16 +36,13 @@ int main() {
     if (ftruncate(filedescriptor, 2048) == -1) {
         perror("[SERVER] Ftruncate failed!");
     }
-    char *ptr = mmap(0, SHM_SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, filedescriptor, 0);
-    if (ptr == MAP_FAILED) {
+    char *pointer = mmap(0, SHM_SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, filedescriptor, 0);
+    if (pointer == MAP_FAILED) {
         perror("[SERVER] Mapping shm object failed!");
-        exit(1);
+        return 0;
     }
 
     int i  = 0;
-    if (mkfifo(location, S_IRUSR | S_IWUSR | S_IWGRP)<0) {
-        perror("FIFO File Creation failed");
-    }
     clock_gettime(CLOCK_REALTIME, &start);    
     while (i<50) {
         char curString[64];
@@ -64,30 +61,25 @@ int main() {
         }
         // puts(curString);
         
-        int out = open(location, O_WRONLY);
-        if ((write(out, curString, sizeof(curString)))<0) {
-            perror("[SERVER] FIFO write failed");
-            return 0;
-        }
-        close(out);
+        sprintf(pointer, "%s", curString);
+        pointer += (sizeof(curString)+1);
         // printf("[SERVER] Characters written: %d\n", charWritten);
-        
-        int in = open(location, O_RDONLY);
+        usleep(200);
         char received[64];
-        if (read(in, received, 64)<0) {
-            perror("[SERVER] FIFO read failed");
-        };
+        sscanf(pointer, "%s", received);
         // printf("[SERVER] Sent: %s\n", curString);
         printf("[SERVER] Received index: %s\n\n", received);
-        for (int k =0; k<56; k++) {
+        for (int k =0; k<64; k++) {
             curString[k] = 0;
-        }
-        close(in);
+        }    
     }
+    munmap(pointer, 2048);
+    close(filedescriptor);
+    shm_unlink(location);
     
     clock_gettime(CLOCK_REALTIME, &stop);
     double duration = stop.tv_sec + stop.tv_nsec/billion - (start.tv_sec + start.tv_nsec/billion);
-
-    printf("FIFO runtime: %lf\n", duration);
+    
+    printf("SHM runtime: %lf\n", duration);
     return 0;
 }
