@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <sys/socket.h>
 #include <errno.h>
-
+#include <string.h>
 
 char characters[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 char strings[50][5];
@@ -13,11 +13,11 @@ void constructor() {
         for (int j = 0; j<4; j++) {
             strings[i][j] = characters[rand()%52];
         }
-        puts(strings[i]);
     }
 }
 
 int main() {
+    constructor();
     // reference: The Linux Programming Interface, Michael Kerrisk
     int sfiledescriptor = socket(AF_UNIX, SOCK_STREAM, 0);
     if (sfiledescriptor!=0) {
@@ -34,19 +34,42 @@ int main() {
         perror("[SERVER] Socket bind failed:");
         return 0;
     }
-    if ((listen(sfd, 64))!=0) {
+    if ((listen(sfiledescriptor, 64))!=0) {
         perror("[SERVER] Socket bind failed:");
         return 0;
     }
 
     int cfiledescriptor = accept(sfiledescriptor, NULL, NULL);
-    
-    if ((write(cfiledescriptor, &strings[], sizeof(strings[0])))!=0) {
-        perror("[SERVER] Socket write failed")
+
+    int i  = 0;    
+    while (i<50) {
+
+        char curString[56];
+        char space[] = " ";
+        for (i; i<(i+5); i++) {
+            // reference: https://stackoverflow.com/questions/8257714/how-to-convert-an-int-to-string-in-c
+            int length = snprintf( NULL, 0, "%d", i);
+            char* numStr = malloc(length + 1);
+            snprintf(numStr, length+1, "%d", i);
+            strcat(&curString, &numStr);       //add integer
+            strcat(&curString, &space);        //add space
+            strcat(&curString, &strings[i]);   //add current string
+            strcat(&curString, &space);        //add space
+        }
+        if ((write(cfiledescriptor, &curString, sizeof(curString)))!=0) {
+            perror("[SERVER] Socket write failed");
+            return 0;
+        }
+        
+        char received[4];
+        if (read(cfiledescriptor, received, sizeof(received))<0) {
+            perror("[SERVER] Socket read failed");
+        };
+        printf("Sent:\n%s\n", curString);
+        printf("Received index: %s\n", received);
     }
-
-
-
     
+    close(sfiledescriptor);
+    close(cfiledescriptor);
     return 0;
 }
