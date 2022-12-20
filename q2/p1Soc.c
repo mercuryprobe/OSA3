@@ -81,7 +81,7 @@ int main() {
         if (read(cfiledescriptor, received, sizeof(received))<0) {
             perror("[SERVER] Socket read failed");
         };
-        printf("[SERVER] Sent:\n%s\n", curString);
+        printf("[SERVER] Sent: %s\n", curString);
         printf("[SERVER] Received index: %s\n", received);
         for (int k =0; k<56; k++) {
             curString[k] = 0;
