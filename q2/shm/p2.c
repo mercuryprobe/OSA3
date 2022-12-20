@@ -9,7 +9,7 @@
 #include <fcntl.h>
 #include <sys/mman.h>
 
-#define semLocation = "/tmp/semSync"
+#define semLocation "/tmp/semSync"
 
 int main() {
     usleep(10);
