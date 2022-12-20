@@ -83,7 +83,9 @@ int main() {
         };
         printf("[SERVER] Sent:\n%s\n", curString);
         printf("[SERVER] Received index: %s\n", received);
-        free(curString);
+        for (int k =0; k<56; k++) {
+            curString[k] = 0;
+        }
     }
     
     close(sfiledescriptor);
