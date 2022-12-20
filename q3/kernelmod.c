@@ -5,8 +5,9 @@
 
 // #define _XOPEN_SOURCE_EXTENDED 1
 // #include <unistd.h>
-#include <linux/kernel.h>
 #include <linux/module.h>
+#include <linux/kernel.h>
+#include <linux/sched.h>
 #include <linux/pid.h>
 #include <linux/pid_namespace.h>
 #include <linux/cred.h>
