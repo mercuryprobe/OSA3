@@ -58,7 +58,7 @@ int main() {
     puts("");
     int i  = 0;    
     while (i<50) {
-        char curString[56];
+        char curString[64];
         const char space[2] = " ";
         int j = i+5;
         for (i; i<(j); i++) {

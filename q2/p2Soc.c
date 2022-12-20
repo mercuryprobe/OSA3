@@ -29,9 +29,9 @@ int main() {
 
     sleep(1);
     const char space[2] = " ";
-    char received[56];
+    char received[64];
     int recSize;
-    while (recSize = read(filedescriptor, received, 56)>0) {
+    while (recSize = read(filedescriptor, received, 64)>0) {
         if (recSize<0) {
             perror("[CLIENT] Socket read failed");
             return 0;
