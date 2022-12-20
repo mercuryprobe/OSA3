@@ -40,7 +40,8 @@ int init_module(void) {
 }
 
 
-int cleanup_module(void) {
+void cleanup_module(void) {
     pr_info("Done\n");
 }
-MODULE_LICENSE("Dual BSD/GPL");
+
+MODULE_LICENSE("GPL");
