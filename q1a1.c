@@ -57,7 +57,7 @@ void *philosphise(void *_i) {
     int i = *((int *) _i);
     
     while (active) {
-        if (l3Check==-1) {continue;}
+        if (l3Check(i)==-1) {continue;}
         if (i<4) {
             // printf("%d :: [%d %d %d %d %d]\n", i, philosopher[0], philosopher[1], philosopher[2], philosopher[3], philosopher[4]);
             if (pickFork(i, i)==-1) {continue;}
