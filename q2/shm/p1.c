@@ -12,7 +12,8 @@
 
 char characters[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 char strings[50][5];
-sem_t *sem = sem_open("/tmp/semSync", O_CREAT | O_RDWR, S_IRUSR | S_IWUSR, 1);
+const char *semLocation = "/sharedmem";
+sem_t *sem = sem_open(semLocation, O_CREAT | O_RDWR, S_IRUSR | S_IWUSR, 1);
 
 
 void constructor() {
@@ -50,7 +51,7 @@ int main() {
     int i  = 0;
     clock_gettime(CLOCK_REALTIME, &start);    
     while (i<50) {
-        sem_wait(&sem);
+        sem_wait(sem);
         char curString[64];
         const char space[2] = " ";
         int j = i+5;
@@ -69,9 +70,9 @@ int main() {
         
         sprintf(pointer, "%s", curString);
         pointer += (sizeof(curString)+1);
-        sem_post(&sem);
+        sem_post(sem);
         // printf("[SERVER] Characters written: %d\n", charWritten);
-        sem_wait(&sem);
+        sem_wait(sem);
         char received[64];
         sscanf(pointer, "%s", received);
         // printf("[SERVER] Sent: %s\n", curString);
