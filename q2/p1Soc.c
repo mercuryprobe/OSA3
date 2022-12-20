@@ -22,7 +22,7 @@ int main() {
     constructor();
     // reference: The Linux Programming Interface, Michael Kerrisk
     int sfiledescriptor = socket(AF_UNIX, SOCK_STREAM, 0);
-    if (sfiledescriptor!=0) {
+    if (sfiledescriptor<0) {
         perror("[SERVER] Socket initiation failed:");
         return 0;
     }

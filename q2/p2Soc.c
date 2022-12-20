@@ -8,7 +8,7 @@
 int main() {
     // reference: The Linux Programming Interface, Michael Kerrisk
     int filedescriptor = socket(AF_UNIX, SOCK_STREAM, 0);
-    if (filedescriptor!=0) {
+    if (filedescriptor<0) {
         perror("[CLIENT] Socket initiation failed:");
         return 0;
     }
