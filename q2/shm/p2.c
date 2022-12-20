@@ -33,7 +33,6 @@ int main() {
         printf("[CLIENT] Received: %s\n", received);
         received[63] = 0;
 
-        close(in);
         char* tokenRecv;
         tokenRecv = strtok(received, space);
 
