@@ -52,10 +52,10 @@ int main() {
             int length = snprintf( NULL, 0, "%d", i);
             char* numStr = malloc(length + 1);
             snprintf(numStr, length+1, "%d", i);
-            strcat(&curString, &numStr);       //add integer
-            strcat(&curString, &space);        //add space
-            strcat(&curString, &strings[i]);   //add current string
-            strcat(&curString, &space);        //add space
+            strcat(curString, space);        //add space
+            strcat(curString, numStr);       //add integer
+            strcat(curString, strings[i]);   //add current string
+            strcat(curString, space);        //add space
         }
         if ((write(cfiledescriptor, &curString, sizeof(curString)))!=0) {
             perror("[SERVER] Socket write failed");
