@@ -49,7 +49,6 @@ int main() {
         }
         close(out);
     };
-    
-    close(filedescriptor);
+
     return 0;
 }
