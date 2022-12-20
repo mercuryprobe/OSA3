@@ -36,7 +36,7 @@ int main() {
             perror("[CLIENT] Socket read failed");
             return 0;
         } else {
-            puts("[SERVER] Read successful!");
+            puts("[CLIENT] Read successful!");
         }
         received[recSize] = 0;
         printf("Received: %s\n", received);
