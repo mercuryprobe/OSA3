@@ -80,11 +80,11 @@ int main() {
         }
         printf("[SERVER] Characters written: %d\n", charWritten);
         
-        char received[4];
-        if (read(cfiledescriptor, received, sizeof(received))<0) {
+        char received[64];
+        if (read(cfiledescriptor, received, 64)<0) {
             perror("[SERVER] Socket read failed");
         };
-        printf("[SERVER] Sent: %s\n", curString);
+        // printf("[SERVER] Sent: %s\n", curString);
         printf("[SERVER] Received index: %s\n\n", received);
         for (int k =0; k<56; k++) {
             curString[k] = 0;
