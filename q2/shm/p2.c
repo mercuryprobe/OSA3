@@ -15,7 +15,7 @@ int main() {
     const char *location = "/sharedmem";
     const char space[2] = " ";
     const char *semLocation = "/sharedmem";
-    sem_t *sem = sem_open(semLocation, O_RDWR, S_IRUSR | S_IWUSR, 1);
+    const sem_t *sem = sem_open(semLocation, O_RDWR, S_IRUSR | S_IWUSR, 1);
     
     int filedescriptor = shm_open(location, O_RDWR, S_IRUSR | S_IWUSR);
 

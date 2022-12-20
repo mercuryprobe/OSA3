@@ -13,7 +13,7 @@
 char characters[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 char strings[50][5];
 const char *semLocation = "/sharedmem";
-sem_t *sem = sem_open(semLocation, O_CREAT | O_RDWR, S_IRUSR | S_IWUSR, 1);
+const sem_t *sem = sem_open(semLocation, O_CREAT | O_RDWR, S_IRUSR | S_IWUSR, 1);
 
 
 void constructor() {
@@ -77,7 +77,7 @@ int main() {
         sscanf(pointer, "%s", received);
         // printf("[SERVER] Sent: %s\n", curString);
         printf("[SERVER] Received index: %s\n\n", received);
-        sem_post(&sem);
+        sem_post(sem);
         for (int k =0; k<64; k++) {
             curString[k] = 0;
         }    
