@@ -20,13 +20,13 @@ module_param(procpid, int, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 int init_module(void) {
     pr_info("Hello world\n");
 
-    structpid = find_get_pid(pidInt);
-    if (structpid==NULL) {
+    pidStruct = find_get_pid(pidInt);
+    if (pidStruct==NULL) {
         pr_info("Invalid PID\n");
         return 0;
     }
 
-    curTask = pid_task(pid_struct, PIDTYPE_PID);
+    curTask = pid_task(pidStruct, PIDTYPE_PID);
     if (curTask==NULL) {
         pr_info("Unexpected error occured.\n");
         return 0;
