@@ -52,7 +52,7 @@ int main() {
             tokenRecv = strtok(NULL, space);
             i+=1;
         }
-        puts("")
+        puts("");
         printf("Splitstring[8]: %s", splitString[8]);
         if ((write(filedescriptor, splitString[8], sizeof(splitString[8])))<0) {
             perror("[CLIENT] Socket write failed");
