@@ -49,7 +49,10 @@ int main() {
     }
 
     int cfiledescriptor = accept(sfiledescriptor, NULL, NULL);
-
+    if (cfiledescriptor<0) {
+        puts("[SERVER] Client accept failed!");
+        return 0;
+    }
     int i  = 0;    
     while (i<50) {
 
