@@ -31,7 +31,7 @@ int main() {
     const char space[2] = " ";
     char received[56];
     int recSize;
-    while (recSize = read(filedescriptor, received, sizeof(received))>0) {
+    while (recSize = read(filedescriptor, received, 56)>0) {
         if (recSize<0) {
             perror("[CLIENT] Socket read failed");
             return 0;
@@ -39,7 +39,7 @@ int main() {
             puts("[CLIENT] Read successful!");
         }
         received[recSize] = 0;
-        printf("Received: %s\n", received);
+        printf("[CLIENT] Received: %s\n", received);
 
         char* tokenRecv;
         tokenRecv = strtok(received, space);
