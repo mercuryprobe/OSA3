@@ -3,6 +3,7 @@
 #include <sys/socket.h>
 #include <errno.h>
 #include <unistd.h>
+#include <sys/un.h>
 
 int main() {
     // reference: The Linux Programming Interface, Michael Kerrisk
