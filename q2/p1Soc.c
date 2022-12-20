@@ -59,7 +59,8 @@ int main() {
     while (i<50) {
         char curString[56];
         const char space[2] = " ";
-        for (i; i<(i+5); i++) {
+        int j = i+5;
+        for (i; i<(j+5); i++) {
             // reference: https://stackoverflow.com/questions/8257714/how-to-convert-an-int-to-string-in-c
             int length = snprintf(NULL, 0, "%d", i);
             char* numStr = malloc(length + 1);
