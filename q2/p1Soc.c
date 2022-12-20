@@ -64,7 +64,7 @@ int main() {
             // reference: https://stackoverflow.com/questions/8257714/how-to-convert-an-int-to-string-in-c
             int length = snprintf(NULL, 0, "%d", i);
             char* numStr = malloc(length + 1);
-            
+
             snprintf(numStr, length+1, "%d", i);
             strcat(curString, numStr);       //add integer
             strcat(curString, space);        //add space
@@ -73,7 +73,7 @@ int main() {
             puts(curString);
         }
         puts(curString);
-        if ((write(cfiledescriptor, &curString, sizeof(curString)))!=0) {
+        if ((write(cfiledescriptor, &curString, sizeof(curString)))<0) {
             perror("[SERVER] Socket write failed");
             return 0;
         }
