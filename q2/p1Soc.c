@@ -52,10 +52,12 @@ int main() {
     if (cfiledescriptor<0) {
         puts("[SERVER] Client accept failed!");
         return 0;
+    } else {
+        puts("[SERVER] Client accept successful!");
     }
     int i  = 0;    
     while (i<50) {
-
+        printf("%d\n", i);
         char curString[56];
         const char space[2] = " ";
         for (i; i<(i+5); i++) {
