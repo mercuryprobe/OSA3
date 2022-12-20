@@ -4,6 +4,9 @@
 #include <errno.h>
 #include <unistd.h>
 #include <sys/un.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <fcntl.h>
 
 int main() {
     // reference: The Linux Programming Interface, Michael Kerrisk
