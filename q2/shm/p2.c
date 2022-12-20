@@ -8,6 +8,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <sys/mman.h>
+#include <semaphore.h>
 
 #define semLocation "/tmp/semSync"
 
@@ -16,7 +17,7 @@ int main() {
     // reference: The Linux Programming Interface, Michael Kerrisk
     const char *location = "/sharedmem";
     const char space[2] = " ";
-    const sem_t *sem = sem_open(semLocation, O_RDWR, S_IRUSR | S_IWUSR, 1);
+    sem_t *sem = sem_open(semLocation, O_RDWR, S_IRUSR | S_IWUSR, 1);
     
     int filedescriptor = shm_open(location, O_RDWR, S_IRUSR | S_IWUSR);
 
