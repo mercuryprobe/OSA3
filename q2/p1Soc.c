@@ -70,7 +70,6 @@ int main() {
             strcat(curString, space);        //add space
             strcat(curString, strings[i]);   //add current string
             strcat(curString, space);        //add space
-            puts(curString);
         }
         puts(curString);
         if ((write(cfiledescriptor, &curString, sizeof(curString)))<0) {
