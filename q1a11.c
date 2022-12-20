@@ -46,6 +46,7 @@ void *philosphise(void *_i) {
 
     while (active) {
         if (i<4) {
+            printf("i :: [%d %d %d %d %d]\n", philosopher[0], philosopher[1], philosopher[2], philosopher[3], philosopher[4]);
             if (pickFork(i, i)==-1) {continue;}
             if (pickFork((i+1)%5, i)==-1) {continue;}
             eat(i);
@@ -53,8 +54,9 @@ void *philosphise(void *_i) {
             sleep(1);
             think(i);
             printf("Philosopher %d think_ [%d::%d]!\n", i, i, (i+1)%5);
-            printf("[%d %d %d %d %d]", philosopher[0], philosopher[1], philosopher[2], philosopher[3], philosopher[4]);
+            
         } else {
+            printf("i :: [%d %d %d %d %d]\n", philosopher[0], philosopher[1], philosopher[2], philosopher[3], philosopher[4]);
             if (pickFork((i+1)%5, i)==-1) {continue;}
             if (pickFork(i, i)==-1) {continue;}
             eat(i);
