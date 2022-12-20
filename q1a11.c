@@ -6,7 +6,6 @@
 
 int philosopher[5] = {0, 0, 0, 0, 0}; //default: thinking
 int forks[5] = {-1, -1, -1, -1, -1};
-pthread_mutex_t locks[5];
 
 static volatile sig_atomic_t active = 1;
 static void interrupter(int x) {
@@ -14,8 +13,6 @@ static void interrupter(int x) {
 }
 
 int pickFork(int i, int philNum) {
-    // printf("Locking %d | Status: %d\n", i, pthread_mutex_trylock(&locks[i]));   
-    // printf("----Fork %d picked----\n", i);
     if ((forks[i]==-1) || ((forks[i]==-1) && ((philosopher[forks[i]]==0) || (philNum==forks[i])))) {
         // if fork is unused or philosopher last using the fork has returned to thinking 
         // or if the philosopher last using the fork was the current one
@@ -36,10 +33,11 @@ void think(int i) {
 }
 
 
-int putFork(int i) {
+int putFork() {
     // doesn't do anything. 
     // the lesser the interaction with forks[], the lesser the chances of conflict
     // returning to thinking will allow other philosophers to take the fork
+    // fork doesn't inherently need to store the state of use, only the user
 }
 
 
@@ -50,7 +48,6 @@ void *philosphise(void *_i) {
         if (i<4) {
             if (pickFork(i, i)==-1) {continue;}
             if (pickFork((i+1)%5, i)==-1) {continue;}
-            philosopher[i]=2;
             eat(i);
             printf("Philosopher %d eating [%d::%d]!\n", i, i, (i+1)%5);
             sleep(1);
@@ -59,7 +56,6 @@ void *philosphise(void *_i) {
         } else {
             if (pickFork((i+1)%5, i)==-1) {continue;}
             if (pickFork(i, i)==-1) {continue;}
-            philosopher[i]=2;
             eat(i);
             printf("Philosopher %d eating [%d::%d]!\n", i, i, (i+1)%5);
             sleep(1);
