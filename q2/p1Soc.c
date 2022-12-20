@@ -55,6 +55,7 @@ int main() {
     } else {
         puts("[SERVER] Client accept successful!");
     }
+    puts("");
     int i  = 0;    
     while (i<50) {
         char curString[56];
@@ -72,10 +73,12 @@ int main() {
             strcat(curString, space);        //add space
         }
         // puts(curString);
-        if ((write(cfiledescriptor, curString, sizeof(curString)))<0) {
+        int charWritten;
+        if ((charWritten = write(cfiledescriptor, curString, sizeof(curString)))<0) {
             perror("[SERVER] Socket write failed");
             return 0;
         }
+        printf("[SERVER] Characters written: %d\n", charWritten);
         
         char received[4];
         if (read(cfiledescriptor, received, sizeof(received))<0) {
