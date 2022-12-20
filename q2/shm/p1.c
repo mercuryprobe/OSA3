@@ -31,7 +31,7 @@ int main() {
     struct timespec start;
     struct timespec stop;
     double billion = 1000000000;
-    sem_t *sem = sem_open(semLocation, O_CREAT | O_RDWR, S_IRUSR | S_IWUSR, 1);
+    sem_t *sem = sem_open(semLocation, O_RDWR, S_IRUSR | S_IWUSR, 1);
 
     constructor();
     
