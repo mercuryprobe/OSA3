@@ -32,7 +32,7 @@ int main() {
             return 0;
         }
         received[recSize] = 0;
-        printf("Received: %s\n", buffer);
+        printf("Received: %s\n", received);
 
         char* tokenRecv;
         tokenRecv = strtok(received, space);
