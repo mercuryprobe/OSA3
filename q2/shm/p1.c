@@ -10,10 +10,11 @@
 #include <sys/mman.h>
 #include <semaphore.h>
 
+#DEFINE semLocation = "/semSync"
+
 char characters[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 char strings[50][5];
-const char *semLocation = "/sharedmem";
-const sem_t *sem = sem_open(semLocation, O_CREAT | O_RDWR, S_IRUSR | S_IWUSR, 1);
+sem_t *sem = sem_open(semLocation, O_CREAT | O_RDWR, S_IRUSR | S_IWUSR, 1);
 
 
 void constructor() {
