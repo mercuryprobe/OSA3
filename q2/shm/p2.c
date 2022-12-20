@@ -12,7 +12,7 @@
 int main() {
     sleep(10);
     // reference: The Linux Programming Interface, Michael Kerrisk
-    const char *location = "/tmp/sharedmem";
+    const char *location = "/sharedmem";
     const char space[2] = " ";
     
     int filedescriptor = shm_open(location, O_RDWR, S_IRUSR | S_IWUSR);

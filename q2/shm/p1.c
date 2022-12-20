@@ -23,7 +23,7 @@ void constructor() {
 
 int main() {
     // reference: The Linux Programming Interface, Michael Kerrisk
-    const char *location = "/tmp/sharedmem";
+    const char *location = "/sharedmem";
     struct timespec start;
     struct timespec stop;
     double billion = 1000000000;
