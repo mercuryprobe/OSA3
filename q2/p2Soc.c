@@ -53,7 +53,7 @@ int main() {
         }
 
 
-        if ((write(filedescriptor, &splitString[8], sizeof(splitString[8])))!=0) {
+        if ((write(filedescriptor, &splitString[8], sizeof(splitString[8])))<0) {
             perror("[CLIENT] Socket write failed");
             return 0;
         }
