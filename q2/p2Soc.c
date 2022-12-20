@@ -48,12 +48,12 @@ int main() {
         int i = 0;
         while (tokenRecv!=NULL) {
             strcpy(splitString[i], tokenRecv);
-            printf("%s ", splitString[i]);
+            // printf("%s ", splitString[i]);
             tokenRecv = strtok(NULL, space);
             i+=1;
         }
-        puts("");
-        printf("Splitstring[8]: %s", splitString[8]);
+        // puts("");
+        // printf("Splitstring[8]: %s", splitString[8]);
         if ((write(filedescriptor, splitString[8], sizeof(splitString[8])))<0) {
             perror("[CLIENT] Socket write failed");
             return 0;
