@@ -32,6 +32,9 @@ int main() {
     
     // https://man7.org/linux/man-pages/man3/shm_open.3.html, example
     int filedescriptor = shm_open(location, O_CREAT | O_EXCL | O_RDWR, S_IRUSR | S_IWUSR);
+    if (filedescriptor<0) {
+        perror("SHM File Creation failed");
+    }
 
     if (ftruncate(filedescriptor, 2048) == -1) {
         perror("[SERVER] Ftruncate failed!");
