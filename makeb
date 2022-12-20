@@ -1,0 +1,5 @@
+main: q1b.out
+	./q1b.out
+
+q1b.out: q1b.c
+	gcc q1b.c -o q1b.out
