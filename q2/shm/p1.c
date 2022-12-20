@@ -31,12 +31,12 @@ int main() {
     struct timespec start;
     struct timespec stop;
     double billion = 1000000000;
-    sem_t *sem = sem_open(semLocation, O_RDWR, S_IRUSR | S_IWUSR, 1);
+    sem_t *sem = sem_open(semLocation, O_CREAT | O_RDWR, S_IRUSR | S_IWUSR, 1);
 
     constructor();
     
     // https://man7.org/linux/man-pages/man3/shm_open.3.html, example
-    int filedescriptor = shm_open(location, O_CREAT | O_EXCL | O_RDWR, S_IRUSR | S_IWUSR);
+    int filedescriptor = shm_open(location, O_RDWR, S_IRUSR | S_IWUSR);
     if (filedescriptor<0) {
         perror("SHM File Creation failed");
     }
