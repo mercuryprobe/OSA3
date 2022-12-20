@@ -1,4 +1,5 @@
 main: p1Soc.out p2Soc.out
+	rm -r /tmp/socketFile
 	./p1Soc.out && ./p2Soc.out
 
 p1Soc.out: p1Soc.c
