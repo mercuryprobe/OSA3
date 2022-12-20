@@ -10,6 +10,7 @@
 #include <sys/mman.h>
 
 int main() {
+    sleep(10);
     // reference: The Linux Programming Interface, Michael Kerrisk
     const char *location = "/tmp/sharedmem";
     const char space[2] = " ";
