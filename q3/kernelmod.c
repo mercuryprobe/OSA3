@@ -32,10 +32,10 @@ int init_module(void) {
         return 0;
     }
 
-    pr_info("PID: %d\n", curTask.pid);
-    pr_info("User ID: %d\n", curTask.cred.uid);
+    pr_info("PID: %d\n", curTask->pid);
+    pr_info("User ID: %d\n", curTask->cred->uid);
     pr_info("Process group ID: %d\n", pid_vnr(task_pgrp(curTask))); //task_tgid_nr(current)
-    pr_info("Process command path: %s\n", curTask.comm);
+    pr_info("Process command path: %s\n", curTask->comm);
 
     return 0;
 }
