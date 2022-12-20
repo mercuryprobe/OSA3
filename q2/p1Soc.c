@@ -65,6 +65,7 @@ int main() {
             strcat(curString, strings[i]);   //add current string
             strcat(curString, space);        //add space
         }
+        puts(curString);
         if ((write(cfiledescriptor, &curString, sizeof(curString)))!=0) {
             perror("[SERVER] Socket write failed");
             return 0;
