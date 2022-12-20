@@ -19,7 +19,7 @@ int main() {
     if (ftruncate(filedescriptor, 2048) == -1) {
         perror("[CLIENT] Ftruncate failed!");
     }
-    char *pointer = mmap(0, SHM_SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, filedescriptor, 0);
+    char *pointer = mmap(0, 2048, PROT_READ | PROT_WRITE, MAP_SHARED, filedescriptor, 0);
     if (pointer == MAP_FAILED) {
         perror("[CLIENT] Mapping shm object failed!");
         return 0;
