@@ -24,7 +24,7 @@ int main() {
     struct timespec start;
     struct timespec stop;
     double billion = 1000000000;
-    clock_gettime(CLOCK_REALTIME, &start);
+    
 
     constructor();
     
@@ -63,7 +63,8 @@ int main() {
         puts("[SERVER] Client accept successful!");
     }
     puts("");
-    int i  = 0;    
+    int i  = 0;
+    clock_gettime(CLOCK_REALTIME, &start);    
     while (i<50) {
         char curString[64];
         const char space[2] = " ";
