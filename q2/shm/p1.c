@@ -10,11 +10,10 @@
 #include <sys/mman.h>
 #include <semaphore.h>
 
-#define semLocation "/tmp/semSync"
+
 
 char characters[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 char strings[50][5];
-
 
 
 void constructor() {
@@ -27,6 +26,7 @@ void constructor() {
 
 int main() {
     // reference: The Linux Programming Interface, Michael Kerrisk
+    const char *semLocation "/tmp/semSync";
     const char *location = "/sharedmem";
     struct timespec start;
     struct timespec stop;
