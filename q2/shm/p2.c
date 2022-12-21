@@ -76,6 +76,8 @@ int main() {
     }
     munmap(pointer, 2048);
     close(filedescriptor);
-
+    sem_unlink(lock);
+    sem_unlink(sem);
+    
     return 0;
 }
