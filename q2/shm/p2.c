@@ -22,7 +22,7 @@ int main() {
     sem = sem_open(semLocation, O_RDWR, S_IRUSR | S_IWUSR, 1);
     sem_t *lock;
     if ((lock = sem_open(lockLoc, O_CREAT | O_RDWR, S_IRUSR | S_IWUSR, 1))==SEM_FAILED) {
-        perror("[CLIENT] Lock error")
+        perror("[CLIENT] Lock error");
     }
     puts("bruh-3");
     sem_wait(lock);

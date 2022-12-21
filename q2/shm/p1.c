@@ -36,7 +36,7 @@ int main() {
     sem_t *sem;
     sem = sem_open(semLocation, O_CREAT | O_RDWR, S_IRUSR | S_IWUSR, 1);
     sem_t *lock;
-    if ((lock = sem_open(lockLoc, O_RDWR, S_IRUSR | S_IWUSR, 1)==SEM_FAILED)){
+    if ((lock = sem_open(lockLoc, O_RDWR, S_IRUSR | S_IWUSR, 1))==SEM_FAILED){
         perror("[SERVER] Lock error");
     };
 
