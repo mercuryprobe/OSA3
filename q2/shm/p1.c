@@ -80,12 +80,14 @@ int main() {
         memcpy(pointer, curString, sizeof(curString));
         pointer += (sizeof(curString)+1);
         
-        *(int*)pointer='-';
+        memcpy(pointer, "-", sizeof("-"));
         // sem_post(sem);
         // printf("[SERVER] Characters written: %d\n", charWritten);
         
-        while(*(int*)pointer == '-') {
-            // wait
+        char currentVal[sizeof("-")];
+        memcpy(currentVal, pointer, sizeof("-"));
+        while((strcmp(currentVal, "-")==0)) {
+            memcpy(currentVal, pointer, sizeof("-"));
         };
         
         // int curSemV;
