@@ -27,18 +27,18 @@ void constructor() {
 int main() {
     // puts("P1");
     // reference: The Linux Programming Interface, Michael Kerrisk
-    const char *lockLoc = "/semLock";
-    const char *semLocation = "/semSync";
+    // const char *lockLoc = "/semLock";
+    // const char *semLocation = "/semSync";
     const char *location = "/sharedmem";
     struct timespec start;
     struct timespec stop;
     double billion = 1000000000;
-    sem_t *sem;
-    sem = sem_open(semLocation, O_CREAT | O_RDWR, S_IRUSR | S_IWUSR, 1);
-    sem_t *lock;
-    if ((lock = sem_open(lockLoc, O_RDWR, S_IRUSR | S_IWUSR, 1))==SEM_FAILED){
-        perror("[SERVER] Lock error");
-    };
+    // sem_t *sem;
+    // sem = sem_open(semLocation, O_CREAT | O_RDWR, S_IRUSR | S_IWUSR, 1);
+    // sem_t *lock;
+    // if ((lock = sem_open(lockLoc, O_RDWR, S_IRUSR | S_IWUSR, 1))==SEM_FAILED){
+    //     perror("[SERVER] Lock error");
+    // };
 
     constructor();
     
@@ -60,7 +60,7 @@ int main() {
     int i  = 0;
     clock_gettime(CLOCK_REALTIME, &start);    
     while (i<50) {
-        sem_wait(sem);
+        // sem_wait(sem);
         char curString[64];
         const char space[2] = " ";
         int j = i+5;
@@ -79,21 +79,22 @@ int main() {
         
         memcpy(pointer, curString, sizeof(curString));
         pointer += (sizeof(curString)+1);
-        
-        sem_post(sem);
+        memcpy(pointer, '-', sizeof('-'));
+        // sem_post(sem);
         // printf("[SERVER] Characters written: %d\n", charWritten);
-        usleep(10);
+        
+        while(strcmp(*pointer, '-')) {
+            // wait
+        };
         
         // int curSemV;
         // sem_getvalue(lock, &curSemV);
         // printf("[SERVER]: LOCK: %d\n", curSemV);
-        printf("[SERVER]: LOCK: %d\n", sem_wait(lock));
+        // printf("[SERVER]: LOCK: %d\n", sem_wait(lock));
         // sem_wait(lock);
-        puts("ok1");
         sem_wait(sem);
-        puts("ok2");
-        sem_post(lock);
-        puts("ok3");
+        // sem_post(lock);
+
         char received[64];
         memcpy(received, pointer, sizeof(received));
         // printf("[SERVER] Sent: %s\n", curString);
@@ -107,8 +108,6 @@ int main() {
     munmap(pointer, 2048);
     close(filedescriptor);
     shm_unlink(location);
-    sem_unlink(lock);
-    sem_unlink(sem);
     
     clock_gettime(CLOCK_REALTIME, &stop);
     double duration = stop.tv_sec + stop.tv_nsec/billion - (start.tv_sec + start.tv_nsec/billion);

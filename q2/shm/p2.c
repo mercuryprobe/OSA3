@@ -14,23 +14,19 @@ int main() {
     
     // puts("P2");
     // reference: The Linux Programming Interface, Michael Kerrisk
-    const char *lockLoc = "/semLock";
+    // const char *lockLoc = "/semLock";
     const char *semLocation = "/semSync";
     const char *location = "/sharedmem";
     const char space[2] = " ";
     sem_t *sem;
     sem = sem_open(semLocation, O_RDWR, S_IRUSR | S_IWUSR, 1);
-    sem_t *lock;
-    if ((lock = sem_open(lockLoc, O_CREAT | O_RDWR, S_IRUSR | S_IWUSR, 1))==SEM_FAILED) {
-        perror("[CLIENT] Lock error");
-    }
-    // puts("bruh-3");
-    // int curSemV;
-    // sem_getvalue(lock, &curSemV);
-    // printf("[CLIENT]: LOCK: %d\n", curSemV);
-    printf("[CLIENT]: LOCK: %d\n", sem_wait(lock));
+    // sem_t *lock;
+    // if ((lock = sem_open(lockLoc, O_CREAT | O_RDWR, S_IRUSR | S_IWUSR, 1))==SEM_FAILED) {
+    //     perror("[CLIENT] Lock error");
+    // }
+
     // sem_wait(lock);
-    puts("bruh-2");
+    
     usleep(5);
     int filedescriptor = shm_open(location, O_RDWR, S_IRUSR | S_IWUSR);
 
@@ -44,11 +40,9 @@ int main() {
     }
 
     for (int l =0; l<10; l++) {
-        puts("bruh-1");
         sem_wait(sem);
-        puts("bruh0");
-        sem_post(lock);
-        puts("bruh1");
+        // sem_post(lock);
+
         char received[64];
         memcpy(received, pointer, sizeof(received));
         printf("[CLIENT] Received: %s\n", received);
@@ -72,12 +66,10 @@ int main() {
         pointer += (sizeof(splitString[8])+1);
         sem_post(sem);
         usleep(100);
-        sem_wait(lock);
+        // sem_wait(lock);
     }
     munmap(pointer, 2048);
     close(filedescriptor);
-    sem_unlink(lock);
-    sem_unlink(sem);
-    
+
     return 0;
 }
