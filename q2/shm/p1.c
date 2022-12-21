@@ -9,6 +9,7 @@
 #include <fcntl.h>
 #include <sys/mman.h>
 #include <semaphore.h>
+#include <time.h>
 
 
 
@@ -35,6 +36,10 @@ int main() {
     double billion = 1000000000;
     sem_t *sem;
     sem = sem_open(semLocation, O_CREAT | O_RDWR, S_IRUSR | S_IWUSR, 1);
+
+    struct timespec tm;
+    tm.tv_sec = 0;
+    tm.tv_nanosec = 50000;
     // sem_t *lock;
     // if ((lock = sem_open(lockLoc, O_RDWR, S_IRUSR | S_IWUSR, 1))==SEM_FAILED){
     //     perror("[SERVER] Lock error");
@@ -89,7 +94,7 @@ int main() {
         memcpy(currentVal, pointer, sizeof("-"));
         while((strcmp(currentVal, "-")==0)) {
             memcpy(currentVal, pointer, sizeof("-"));
-            // usleep(1);
+            nanosleep(tm, NULL);
         };
         
         // int curSemV;

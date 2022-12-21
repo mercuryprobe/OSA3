@@ -9,6 +9,7 @@
 #include <fcntl.h>
 #include <sys/mman.h>
 #include <semaphore.h>
+#include <time.h>
 
 int main() {
     
@@ -20,6 +21,9 @@ int main() {
     const char space[2] = " ";
     sem_t *sem;
     sem = sem_open(semLocation, O_RDWR, S_IRUSR | S_IWUSR, 1);
+    struct timespec tm;
+    tm.tv_sec = 0;
+    tm.tv_nanosec = 50000;
     // sem_t *lock;
     // if ((lock = sem_open(lockLoc, O_CREAT | O_RDWR, S_IRUSR | S_IWUSR, 1))==SEM_FAILED) {
     //     perror("[CLIENT] Lock error");
@@ -67,7 +71,7 @@ int main() {
         sem_post(sem);
         while((strcmp(currentVal, "]")==0)) {
             memcpy(currentVal, pointer, sizeof("]"));
-            // usleep(1);
+            nanosleep(tm, NULL);
         };
         // sem_wait(lock);
     }
