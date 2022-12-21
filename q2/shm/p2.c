@@ -21,7 +21,7 @@ int main() {
     sem_t *sem;
     sem = sem_open(semLocation, O_RDWR, S_IRUSR | S_IWUSR, 1);
     sem_t *lock;
-    lock = sem_open(lockLoc, O_RDWR, S_IRUSR | S_IWUSR, 1);
+    lock = sem_open(lockLoc, O_CREAT | O_RDWR, S_IRUSR | S_IWUSR, 1);
     sem_wait(lock);
     usleep(5);
     int filedescriptor = shm_open(location, O_RDWR, S_IRUSR | S_IWUSR);
