@@ -81,9 +81,13 @@ int main() {
         sem_post(sem);
         // printf("[SERVER] Characters written: %d\n", charWritten);
         usleep(10);
+        puts("ok0");
         sem_wait(lock);
+        puts("ok1");
         sem_wait(sem);
+        puts("ok2");
         sem_post(lock);
+        puts("ok3");
         char received[64];
         memcpy(received, pointer, sizeof(received));
         // printf("[SERVER] Sent: %s\n", curString);
