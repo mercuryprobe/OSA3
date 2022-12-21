@@ -78,6 +78,7 @@ int main() {
         };
         // sem_wait(lock);
     }
+    sem_post(sem);
     munmap(pointer, 2048);
     close(filedescriptor);
     sem_close(sem);

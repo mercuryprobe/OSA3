@@ -115,6 +115,7 @@ int main() {
             curString[k] = 0;
         }    
     }
+    sem_post(sem);
     munmap(pointer, 2048);
     close(filedescriptor);
     shm_unlink(location);
