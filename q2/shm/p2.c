@@ -29,7 +29,7 @@ int main() {
         return 0;
     }
 
-    
+    puts("check1");
     for (int l =0; l<10; l++) {
         sem_wait(sem);
         char received[64];
