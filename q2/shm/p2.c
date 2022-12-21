@@ -12,6 +12,7 @@
 
 int main() {
     usleep(200);
+    puts("P2");
     // reference: The Linux Programming Interface, Michael Kerrisk
     const char *semLocation = "/semSync";
     const char *location = "/sharedmem";

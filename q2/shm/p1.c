@@ -25,6 +25,7 @@ void constructor() {
 }
 
 int main() {
+    puts("P1");
     // reference: The Linux Programming Interface, Michael Kerrisk
     const char *semLocation = "/semSync";
     const char *location = "/sharedmem";
