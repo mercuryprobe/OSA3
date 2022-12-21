@@ -31,7 +31,7 @@ int main() {
 
     // sem_wait(lock);
     
-    usleep(50);
+    usleep(100);
     int filedescriptor = shm_open(location, O_RDWR, S_IRUSR | S_IWUSR);
 
     if (ftruncate(filedescriptor, 2048) == -1) {
