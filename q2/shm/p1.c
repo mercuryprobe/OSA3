@@ -28,7 +28,7 @@ int main() {
     // puts("P1");
     // reference: The Linux Programming Interface, Michael Kerrisk
     // const char *lockLoc = "/semLock";
-    // const char *semLocation = "/semSync";
+    const char *semLocation = "/semSync";
     const char *location = "/sharedmem";
     struct timespec start;
     struct timespec stop;
@@ -79,7 +79,8 @@ int main() {
         
         memcpy(pointer, curString, sizeof(curString));
         pointer += (sizeof(curString)+1);
-        memcpy(pointer, '-', sizeof('-'));
+        
+        *pointer='-';
         // sem_post(sem);
         // printf("[SERVER] Characters written: %d\n", charWritten);
         
