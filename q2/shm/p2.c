@@ -11,7 +11,7 @@
 #include <semaphore.h>
 
 int main() {
-    usleep(10);
+    usleep(100);
     // reference: The Linux Programming Interface, Michael Kerrisk
     const char *semLocation = "/tmp/semSync";
     const char *location = "/sharedmem";
@@ -29,7 +29,7 @@ int main() {
         return 0;
     }
 
-    puts("check1");
+    usleep(100);
     for (int l =0; l<10; l++) {
         sem_wait(sem);
         char received[64];
