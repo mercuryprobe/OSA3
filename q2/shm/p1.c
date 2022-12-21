@@ -60,7 +60,7 @@ int main() {
     int i  = 0;
     clock_gettime(CLOCK_REALTIME, &start);    
     while (i<50) {
-        // sem_wait(sem);
+        sem_wait(sem);
         char curString[64];
         const char space[2] = " ";
         int j = i+5;
@@ -81,7 +81,7 @@ int main() {
         pointer += (sizeof(curString)+1);
         
         memcpy(pointer, "-", sizeof("-"));
-        // sem_post(sem);
+        sem_post(sem);
         // printf("[SERVER] Characters written: %d\n", charWritten);
         
         char currentVal[sizeof("-")];
