@@ -49,7 +49,7 @@ int main() {
         perror("[SERVER] Mapping shm object failed!");
         return 0;
     }
-
+    puts("check");
     int i  = 0;
     clock_gettime(CLOCK_REALTIME, &start);    
     while (i<50) {
