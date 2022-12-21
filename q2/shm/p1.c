@@ -85,7 +85,7 @@ int main() {
         memcpy(pointer, curString, sizeof(curString));
         pointer += (sizeof(curString)+1);
         
-        puts("CHECK");
+        // puts("CHECK");
         memcpy(pointer, "-", sizeof("-"));
         sem_post(sem);
         // printf("[SERVER] Characters written: %d\n", charWritten);
