@@ -119,7 +119,7 @@ int main() {
     close(filedescriptor);
     shm_unlink(location);
     sem_close(sem);
-    sem_unlink();
+    sem_unlink(&semLocation);
 
     
     clock_gettime(CLOCK_REALTIME, &stop);
