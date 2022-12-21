@@ -30,7 +30,6 @@ int main() {
         return 0;
     }
 
-    usleep(100);
     for (int l =0; l<10; l++) {
         sem_wait(sem);
         char received[64];
