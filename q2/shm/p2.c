@@ -72,13 +72,9 @@ int main() {
         memcpy(pointer, "]", sizeof("]"));
         char currentVal[sizeof("]")];
         memcpy(currentVal, pointer, sizeof("]"));
-        while((strcmp(currentVal, "]")==0)) {
-            if (l!=9) {
-                memcpy(currentVal, pointer, sizeof("]"));
-                nanosleep(&tm, NULL);
-            } else {
-                break;
-            }
+        while((strcmp(currentVal, "]")==0) && (l<9)) {
+            memcpy(currentVal, pointer, sizeof("]"));
+            nanosleep(&tm, NULL);
         };
         // sem_wait(lock);
     }
