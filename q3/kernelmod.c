@@ -2,6 +2,7 @@
 // 1. The Linux Kernel Module Programming Guide, Peter Jay Salzman, Michael Burian, Ori Pomerantz, Bob Mottram, Jim Huang
 // 2. https://stackoverflow.com/questions/8547332/efficient-way-to-find-task-struct-by-pid
 // 3. https://github.com/torvalds/linux/blob/master/include/linux/sched.h
+// 4. https://www.kernel.org/doc/Documentation/security/credentials.txt
 
 // #define _XOPEN_SOURCE_EXTENDED 1
 // #include <unistd.h>
@@ -33,7 +34,7 @@ int init_module(void) {
 
     pr_info("PID: %d\n", curTask->pid);
     pr_info("User ID: %d\n", curTask->cred->uid);
-    pr_info("Process group ID: %d\n", pid_vnr(task_pgrp(curTask))); //task_tgid_nr(current)
+    pr_info("Process group ID: %d\n", pid_vnr(task_pgrp(curTask))); //task_tgid_nr(current) //apparently curTask->cred->gid was also an option
     pr_info("Process command path: %s\n", curTask->comm);
 
     return 0;
