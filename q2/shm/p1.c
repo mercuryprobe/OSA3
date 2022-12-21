@@ -80,7 +80,7 @@ int main() {
         
         sem_post(sem);
         // printf("[SERVER] Characters written: %d\n", charWritten);
-        usleep(20);
+        usleep(10);
         puts("ok0");
         sem_wait(lock);
         puts("ok1");

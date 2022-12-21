@@ -60,6 +60,7 @@ int main() {
         memcpy(pointer, splitString[8], sizeof(splitString[8]));
         pointer += (sizeof(splitString[8])+1);
         sem_post(sem);
+        usleep(10);
         sem_wait(lock);
     }
     munmap(pointer, 2048);
