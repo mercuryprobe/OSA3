@@ -54,6 +54,7 @@ int main() {
     clock_gettime(CLOCK_REALTIME, &start);    
     while (i<50) {
         sem_wait(sem);
+        puts("check");
         char curString[64];
         const char space[2] = " ";
         int j = i+5;
@@ -69,7 +70,7 @@ int main() {
             strcat(curString, space);        //add space
         }
         // puts(curString);
-        puts("check");
+        
         sprintf(pointer, "%s", curString);
         pointer += (sizeof(curString)+1);
         
