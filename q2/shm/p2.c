@@ -54,7 +54,7 @@ int main() {
         // printf("Splitstring[8]: %s", splitString[8]);
         memcpy(pointer, splitString[8], sizeof(splitString[8]));
         pointer += (sizeof(splitString[8])+1);
-        puts("Was here");
+        printf("%s %d\n", splitString[8], sizeof(splitString[8]));
         sem_post(sem);
     }
     munmap(pointer, 2048);
