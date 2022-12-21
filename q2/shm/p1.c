@@ -77,7 +77,7 @@ int main() {
         
         sem_post(sem);
         // printf("[SERVER] Characters written: %d\n", charWritten);
-        usleep(100);
+        usleep(50);
         sem_wait(sem);
         char received[64];
         memcpy(received, pointer, sizeof(received));
