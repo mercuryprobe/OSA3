@@ -24,7 +24,10 @@ int main() {
     if ((lock = sem_open(lockLoc, O_CREAT | O_RDWR, S_IRUSR | S_IWUSR, 1))==SEM_FAILED) {
         perror("[CLIENT] Lock error");
     }
-    puts("bruh-3");
+    // puts("bruh-3");
+    int curSemV;
+    sem_getvalue(&lock, &curSemV);
+    printf("[CLIENT]: LOCK: %d\n", curSemV);
     sem_wait(lock);
     puts("bruh-2");
     usleep(5);
