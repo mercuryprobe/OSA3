@@ -36,6 +36,7 @@ int main() {
     }
 
     for (int l =0; l<10; l++) {
+        puts("bruh-1");
         sem_wait(sem);
         puts("bruh0");
         sem_post(lock);
