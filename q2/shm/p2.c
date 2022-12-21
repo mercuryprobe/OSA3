@@ -20,6 +20,7 @@ int main() {
     const char *location = "/sharedmem";
     const char space[2] = " ";
     sem_t *sem;
+    sleep(1);
     sem = sem_open(semLocation, O_RDWR, S_IRUSR | S_IWUSR, 1);
     struct timespec tm;
     tm.tv_sec = 0;
@@ -31,7 +32,6 @@ int main() {
 
     // sem_wait(lock);
     
-    sleep(1);
     int filedescriptor = shm_open(location, O_RDWR, S_IRUSR | S_IWUSR);
 
     if (ftruncate(filedescriptor, 2048) == -1) {
