@@ -11,7 +11,7 @@
 #include <semaphore.h>
 
 int main() {
-    usleep(200);
+    usleep(50);
     puts("P2");
     // reference: The Linux Programming Interface, Michael Kerrisk
     const char *semLocation = "/semSync";
