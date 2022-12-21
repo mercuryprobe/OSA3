@@ -69,6 +69,8 @@ int main() {
         memcpy(pointer, splitString[8], sizeof(splitString[8]));
         pointer += (sizeof(splitString[8])+1);
         sem_post(sem);
+        char currentVal[sizeof("]")];
+        memcpy(currentVal, pointer, sizeof("]"));
         while((strcmp(currentVal, "]")==0)) {
             memcpy(currentVal, pointer, sizeof("]"));
             nanosleep(&tm, NULL);
