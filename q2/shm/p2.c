@@ -23,7 +23,7 @@ int main() {
     sem = sem_open(semLocation, O_RDWR, S_IRUSR | S_IWUSR, 1);
     struct timespec tm;
     tm.tv_sec = 0;
-    tm.tv_nanosec = 50000;
+    tm.tv_nsec = 50000;
     // sem_t *lock;
     // if ((lock = sem_open(lockLoc, O_CREAT | O_RDWR, S_IRUSR | S_IWUSR, 1))==SEM_FAILED) {
     //     perror("[CLIENT] Lock error");
@@ -71,7 +71,7 @@ int main() {
         sem_post(sem);
         while((strcmp(currentVal, "]")==0)) {
             memcpy(currentVal, pointer, sizeof("]"));
-            nanosleep(tm, NULL);
+            nanosleep(&tm, NULL);
         };
         // sem_wait(lock);
     }
