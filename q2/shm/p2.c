@@ -11,7 +11,7 @@
 #include <semaphore.h>
 
 int main() {
-    usleep(100);
+    usleep(200);
     // reference: The Linux Programming Interface, Michael Kerrisk
     const char *semLocation = "/semSync";
     const char *location = "/sharedmem";
