@@ -37,7 +37,9 @@ int main() {
 
     for (int l =0; l<10; l++) {
         sem_wait(sem);
+        puts("bruh0");
         sem_post(lock);
+        puts("bruh1");
         char received[64];
         memcpy(received, pointer, sizeof(received));
         printf("[CLIENT] Received: %s\n", received);
