@@ -46,7 +46,7 @@ int main() {
     if (ftruncate(filedescriptor, 2048) == -1) {
         perror("[SERVER] Ftruncate failed!");
     }
-    char *pointer = mmap(0, 2048, PROT_READ | PROT_WRITE, MAP_SHARED, filedescriptor, 0);
+    void *pointer = mmap(0, 2048, PROT_READ | PROT_WRITE, MAP_SHARED, filedescriptor, 0);
     if (pointer == MAP_FAILED) {
         perror("[SERVER] Mapping shm object failed!");
         return 0;
@@ -72,16 +72,17 @@ int main() {
         }
         // puts(curString);
         
-        sprintf(pointer, "%s", curString);
+        memcpy(pointer, curString, sizeof(curString));
         pointer += (sizeof(curString)+1);
         
         sem_post(sem);
         // printf("[SERVER] Characters written: %d\n", charWritten);
         sem_wait(sem);
         char received[64];
-        sscanf(pointer, "%s", received);
+        memcpy(received, pointer, sizeof(received));
         // printf("[SERVER] Sent: %s\n", curString);
         printf("[SERVER] Received index: %s\n\n", received);
+        pointer += (sizeof(received)+1);
         sem_post(sem);
         for (int k =0; k<64; k++) {
             curString[k] = 0;

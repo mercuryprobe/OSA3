@@ -25,7 +25,7 @@ int main() {
     if (ftruncate(filedescriptor, 2048) == -1) {
         perror("[CLIENT] Ftruncate failed!");
     }
-    char *pointer = mmap(0, 2048, PROT_READ | PROT_WRITE, MAP_SHARED, filedescriptor, 0);
+    void *pointer = mmap(0, 2048, PROT_READ | PROT_WRITE, MAP_SHARED, filedescriptor, 0);
     if (pointer == MAP_FAILED) {
         perror("[CLIENT] Mapping shm object failed!");
         return 0;
@@ -34,14 +34,15 @@ int main() {
     for (int l =0; l<10; l++) {
         sem_wait(sem);
         char received[64];
-        sscanf(pointer, "%s", received);
+        memcpy(received, pointer, sizeof(received));
         printf("[CLIENT] Received: %s\n", received);
-        received[63] = 0;
+        // received[63] = 0;
+        pointer += (sizeof(received)+1)
 
         char* tokenRecv;
         tokenRecv = strtok(received, space);
 
-        char splitString[16][16];
+        char splitString[16][64];
         int i = 0;
         while (tokenRecv!=NULL) {
             strcpy(splitString[i], tokenRecv);
@@ -51,7 +52,8 @@ int main() {
         }
         // puts("");
         // printf("Splitstring[8]: %s", splitString[8]);
-        sprintf(pointer, "%s", splitString[8]);
+        memcpy(pointer, splitString[8], sizeof(splitString[8]));
+        pointer += (sizeof(splitString[8])+1)
         sem_post(sem);
     }
     munmap(pointer, 2048);
