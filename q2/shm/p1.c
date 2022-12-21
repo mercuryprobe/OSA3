@@ -25,8 +25,9 @@ void constructor() {
 }
 
 int main() {
-    puts("P1");
+    // puts("P1");
     // reference: The Linux Programming Interface, Michael Kerrisk
+    const char *lockLoc = "/semLock";
     const char *semLocation = "/semSync";
     const char *location = "/sharedmem";
     struct timespec start;
@@ -34,6 +35,8 @@ int main() {
     double billion = 1000000000;
     sem_t *sem;
     sem = sem_open(semLocation, O_CREAT | O_RDWR, S_IRUSR | S_IWUSR, 1);
+    sem_t *lock;
+    lock = sem_open(lockLoc, O_RDWR, S_IRUSR | S_IWUSR, 1);
 
     constructor();
     
@@ -77,8 +80,10 @@ int main() {
         
         sem_post(sem);
         // printf("[SERVER] Characters written: %d\n", charWritten);
-        usleep(50);
+        usleep(10);
+        sem_wait(lock);
         sem_wait(sem);
+        sem_post(lock);
         char received[64];
         memcpy(received, pointer, sizeof(received));
         // printf("[SERVER] Sent: %s\n", curString);

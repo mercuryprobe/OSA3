@@ -11,15 +11,19 @@
 #include <semaphore.h>
 
 int main() {
-    usleep(5);
-    puts("P2");
+    
+    // puts("P2");
     // reference: The Linux Programming Interface, Michael Kerrisk
+    const char *lockLoc = "/semLock";
     const char *semLocation = "/semSync";
     const char *location = "/sharedmem";
     const char space[2] = " ";
     sem_t *sem;
     sem = sem_open(semLocation, O_RDWR, S_IRUSR | S_IWUSR, 1);
-    
+    sem_t *lock;
+    lock = sem_open(lockLoc, O_RDWR, S_IRUSR | S_IWUSR, 1);
+    sem_wait(lock);
+    usleep(5);
     int filedescriptor = shm_open(location, O_RDWR, S_IRUSR | S_IWUSR);
 
     if (ftruncate(filedescriptor, 2048) == -1) {
@@ -33,6 +37,7 @@ int main() {
 
     for (int l =0; l<10; l++) {
         sem_wait(sem);
+        sem_post(lock);
         char received[64];
         memcpy(received, pointer, sizeof(received));
         printf("[CLIENT] Received: %s\n", received);
@@ -55,6 +60,7 @@ int main() {
         memcpy(pointer, splitString[8], sizeof(splitString[8]));
         pointer += (sizeof(splitString[8])+1);
         sem_post(sem);
+        sem_wait(lock);
     }
     munmap(pointer, 2048);
     close(filedescriptor);
