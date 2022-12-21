@@ -69,10 +69,10 @@ int main() {
             strcat(curString, space);        //add space
         }
         // puts(curString);
-        
+        puts("check");
         sprintf(pointer, "%s", curString);
         pointer += (sizeof(curString)+1);
-        puts("check");
+        
         sem_post(sem);
         // printf("[SERVER] Characters written: %d\n", charWritten);
         sem_wait(sem);
