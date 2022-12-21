@@ -82,7 +82,7 @@ int main() {
         
         sem_post(sem);
         // printf("[SERVER] Characters written: %d\n", charWritten);
-        // sleep(1);
+        usleep(10);
         
         int curSemV;
         sem_getvalue(lock, &curSemV);
