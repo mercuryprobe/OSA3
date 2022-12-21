@@ -37,7 +37,7 @@ int main() {
         memcpy(received, pointer, sizeof(received));
         printf("[CLIENT] Received: %s\n", received);
         // received[63] = 0;
-        pointer += (sizeof(received)+1)
+        pointer += (sizeof(received)+1);
 
         char* tokenRecv;
         tokenRecv = strtok(received, space);
@@ -53,7 +53,7 @@ int main() {
         // puts("");
         // printf("Splitstring[8]: %s", splitString[8]);
         memcpy(pointer, splitString[8], sizeof(splitString[8]));
-        pointer += (sizeof(splitString[8])+1)
+        pointer += (sizeof(splitString[8])+1);
         sem_post(sem);
     }
     munmap(pointer, 2048);
