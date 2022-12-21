@@ -80,6 +80,7 @@ int main() {
     }
     munmap(pointer, 2048);
     close(filedescriptor);
+    sem_close(sem);
 
     return 0;
 }

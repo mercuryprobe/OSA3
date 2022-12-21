@@ -118,6 +118,9 @@ int main() {
     munmap(pointer, 2048);
     close(filedescriptor);
     shm_unlink(location);
+    sem_close(sem);
+    // sem_unlink()
+
     
     clock_gettime(CLOCK_REALTIME, &stop);
     double duration = stop.tv_sec + stop.tv_nsec/billion - (start.tv_sec + start.tv_nsec/billion);
