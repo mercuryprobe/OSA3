@@ -85,7 +85,7 @@ int main() {
         // sleep(1);
         
         int curSemV;
-        sem_getvalue(&lock, &curSemV);
+        sem_getvalue(lock, &curSemV);
         printf("[SERVER]: LOCK: %d\n", curSemV);
         sem_wait(lock);
         puts("ok1");

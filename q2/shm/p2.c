@@ -26,7 +26,7 @@ int main() {
     }
     // puts("bruh-3");
     int curSemV;
-    sem_getvalue(&lock, &curSemV);
+    sem_getvalue(lock, &curSemV);
     printf("[CLIENT]: LOCK: %d\n", curSemV);
     sem_wait(lock);
     puts("bruh-2");
