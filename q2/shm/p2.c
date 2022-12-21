@@ -20,7 +20,7 @@ int main() {
     const char *location = "/sharedmem";
     const char space[2] = " ";
     sem_t *sem;
-    sleep(1);
+    usleep(500);
     sem = sem_open(semLocation, O_RDWR, S_IRUSR | S_IWUSR, 1);
     struct timespec tm;
     tm.tv_sec = 0;
