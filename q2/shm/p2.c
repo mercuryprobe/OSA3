@@ -73,8 +73,12 @@ int main() {
         char currentVal[sizeof("]")];
         memcpy(currentVal, pointer, sizeof("]"));
         while((strcmp(currentVal, "]")==0)) {
-            memcpy(currentVal, pointer, sizeof("]"));
-            nanosleep(&tm, NULL);
+            if (l!=49) {
+                memcpy(currentVal, pointer, sizeof("]"));
+                nanosleep(&tm, NULL);
+            } else {
+                break;
+            }
         };
         // sem_wait(lock);
     }
