@@ -23,7 +23,7 @@ int main() {
     sem = sem_open(semLocation, O_RDWR, S_IRUSR | S_IWUSR, 1);
     struct timespec tm;
     tm.tv_sec = 0;
-    tm.tv_nsec = 50000;
+    tm.tv_nsec = 5000;
     // sem_t *lock;
     // if ((lock = sem_open(lockLoc, O_CREAT | O_RDWR, S_IRUSR | S_IWUSR, 1))==SEM_FAILED) {
     //     perror("[CLIENT] Lock error");
