@@ -25,10 +25,11 @@ int main() {
         perror("[CLIENT] Lock error");
     }
     // puts("bruh-3");
-    int curSemV;
-    sem_getvalue(lock, &curSemV);
-    printf("[CLIENT]: LOCK: %d\n", curSemV);
-    sem_wait(lock);
+    // int curSemV;
+    // sem_getvalue(lock, &curSemV);
+    // printf("[CLIENT]: LOCK: %d\n", curSemV);
+    printf("[CLIENT]: LOCK: %d\n", sem_wait(lock));
+    // sem_wait(lock);
     puts("bruh-2");
     usleep(5);
     int filedescriptor = shm_open(location, O_RDWR, S_IRUSR | S_IWUSR);
