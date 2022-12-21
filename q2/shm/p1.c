@@ -89,7 +89,7 @@ int main() {
         memcpy(currentVal, pointer, sizeof("-"));
         while((strcmp(currentVal, "-")==0)) {
             memcpy(currentVal, pointer, sizeof("-"));
-            usleep(2);
+            usleep(1);
         };
         
         // int curSemV;
