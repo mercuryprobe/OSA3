@@ -84,10 +84,11 @@ int main() {
         // printf("[SERVER] Characters written: %d\n", charWritten);
         usleep(10);
         
-        int curSemV;
-        sem_getvalue(lock, &curSemV);
-        printf("[SERVER]: LOCK: %d\n", curSemV);
-        sem_wait(lock);
+        // int curSemV;
+        // sem_getvalue(lock, &curSemV);
+        // printf("[SERVER]: LOCK: %d\n", curSemV);
+        printf("[SERVER]: LOCK: %d\n", sem_wait(lock));
+        // sem_wait(lock);
         puts("ok1");
         sem_wait(sem);
         puts("ok2");
