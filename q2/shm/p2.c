@@ -65,6 +65,10 @@ int main() {
         memcpy(pointer, splitString[8], sizeof(splitString[8]));
         pointer += (sizeof(splitString[8])+1);
         sem_post(sem);
+        while((strcmp(currentVal, "]")==0)) {
+            memcpy(currentVal, pointer, sizeof("]"));
+            // usleep(1);
+        };
         // sem_wait(lock);
     }
     munmap(pointer, 2048);
